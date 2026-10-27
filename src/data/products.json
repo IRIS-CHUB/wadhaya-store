@@ -1,25 +1,23 @@
 [
   {
     "id": "sarab",
-    "name": {
-      "ar": "سراب",
-      "en": "Sarab"
-    },
-    "type": {
-      "ar": "عطر فاخر",
-      "en": "Eau de Parfum"
-    },
-    "price": 200,
+    "name": { "ar": "سراب", "en": "Sarab" },
+    "type": { "ar": "عطر فاخر", "en": "Eau de Parfum" },
+    "oldPrice": 200,
+    "price": 120,
     "size": "50 ml",
     "note": {
       "ar": "عنبر دافئ • زعفران • أخشاب ثمينة",
       "en": "Warm amber • Saffron • Precious woods"
     },
-    "image": "/images/sarab.jpg",
-    "tag": {
-      "ar": "الأكثر تميزاً",
-      "en": "Signature"
+    "notes": {
+      "top": ["Grapefruit", "Lavender", "Artemisia", "Cardamom", "Cinnamon", "Cypress", "Saffron", "Bergamot", "Apple", "Nutmeg", "Styrax"],
+      "middle": ["Tobacco", "Kharismal", "Cashmeran", "Jasmine", "Muguet", "Geranium", "Agarwood", "Labdanum", "Cedarwood", "Cyprus"],
+      "base": ["Oud", "Musk", "Patchouli", "Sandalwood", "Leather", "Gajak", "Vanilla", "Tonka", "Vetiver", "Amber", "Benzoin/tolu"],
+      "family": "Oriental - Ambery - Leathery"
     },
+    "image": "/images/sarab.jpg",
+    "tag": { "ar": "الأكثر تميزاً", "en": "Signature" },
     "description": {
       "ar": "رحلة حسية بين دفء العنبر وغموض الصحراء عند الغروب. توقيع عطري عميق، أنيق، ولا يُنسى.",
       "en": "A sensory journey through warm amber and the mystery of the desert at dusk. Deep, elegant and unforgettable."
@@ -27,77 +25,59 @@
   },
   {
     "id": "rabdan",
-    "name": {
-      "ar": "ربدان",
-      "en": "Rabdan"
-    },
-    "type": {
-      "ar": "عطر خشبي",
-      "en": "Woody Perfume"
-    },
-    "price": 150,
+    "name": { "ar": "ربدان", "en": "Rabdan" },
+    "type": { "ar": "عطر منعش فاكهي", "en": "Fresh Fruity Perfume" },
+    "oldPrice": 150,
+    "price": 90,
     "size": "50 ml",
     "note": {
-      "ar": "عود • جلد • توابل ناعمة",
-      "en": "Oud • Leather • Soft spices"
+      "ar": "برتقال • برغموت • مسك أبيض • فانيلا",
+      "en": "Orange • Bergamot • White musk • Vanilla"
+    },
+    "notes": {
+      "top": ["Orange", "Bergamot", "Lemon"],
+      "middle": ["Mediterranean Fruits", "Fruity Notes"],
+      "base": ["White Musk", "Amber", "Madagascar Vanilla"]
     },
     "image": "/images/rabdan.jpg",
-    "tag": {
-      "ar": "طابع شرقي",
-      "en": "Oriental"
-    },
+    "tag": { "ar": "منعش", "en": "Fresh" },
     "description": {
-      "ar": "شخصية واثقة تستحضر أصالة العود ونعومة الجلد، بلمسة معاصرة متوازنة.",
-      "en": "A confident composition of authentic oud and supple leather, balanced with a contemporary touch."
+      "ar": "افتتاحية حمضية مشرقة تنساب نحو فواكه البحر المتوسط، وتستقر على مسك أبيض وفانيلا مدغشقر الدافئة.",
+      "en": "A bright citrus opening flowing into Mediterranean fruits, settling on white musk and warm Madagascar vanilla."
     }
   },
   {
     "id": "zayed",
-    "name": {
-      "ar": "زايد",
-      "en": "Zayed"
-    },
-    "type": {
-      "ar": "عطر فاخر",
-      "en": "Luxury Perfume"
-    },
-    "price": 150,
+    "name": { "ar": "زايد", "en": "Zayed" },
+    "type": { "ar": "عطر فاخر", "en": "Luxury Perfume" },
+    "oldPrice": 200,
+    "price": 120,
     "size": "50 ml",
     "note": {
-      "ar": "أكتب النفحات هنا",
-      "en": "Add notes here"
+      "ar": "ليمون كالابري • ورد تركي • فانيلا • مسك أبيض",
+      "en": "Calabrian lemon • Turkish rose • Vanilla • White musk"
+    },
+    "notes": {
+      "top": ["Fresh Calabrian Lemon"],
+      "middle": ["Turkish Rose", "Turkish Delight"],
+      "base": ["Intense Vanilla", "White Musk", "Cedarwood"]
     },
     "image": "/images/zayed.png",
-    "tag": {
-      "ar": "جديد",
-      "en": "New"
-    },
+    "tag": { "ar": "جديد", "en": "New" },
     "description": {
-      "ar": "أكتب وصف العطر هنا.",
-      "en": "Add the fragrance description here."
+      "ar": "انتعاش الليمون الكالابري يلتقي بالورد التركي والحلقوم، ويستقر على فانيلا مكثفة ومسك أبيض وخشب الأرز.",
+      "en": "Fresh Calabrian lemon meets Turkish rose and Turkish delight, resting on intense vanilla, white musk and cedarwood."
     }
   },
   {
     "id": "layl",
-    "name": {
-      "ar": "ليل",
-      "en": "Layl"
-    },
-    "type": {
-      "ar": "عطر مسائي",
-      "en": "Evening Perfume"
-    },
+    "name": { "ar": "ليل", "en": "Layl" },
+    "type": { "ar": "عطر مسائي", "en": "Evening Perfume" },
     "price": 250,
     "size": "50 ml",
-    "note": {
-      "ar": "ورد داكن • مسك • فانيلا",
-      "en": "Dark rose • Musk • Vanilla"
-    },
+    "note": { "ar": "ورد داكن • مسك • فانيلا", "en": "Dark rose • Musk • Vanilla" },
     "image": "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1000&q=85",
-    "tag": {
-      "ar": "إصدار محدود",
-      "en": "Limited"
-    },
+    "tag": { "ar": "إصدار محدود", "en": "Limited" },
     "description": {
       "ar": "نفحات مخملية تتكشف بهدوء، تجمع الورد الداكن بالمسك والفانيلا الدافئة.",
       "en": "Velvety notes unfold slowly, blending dark rose with musk and warm vanilla."
@@ -105,25 +85,13 @@
   },
   {
     "id": "diwan",
-    "name": {
-      "ar": "ديوان",
-      "en": "Diwan"
-    },
-    "type": {
-      "ar": "عطر يومي راقٍ",
-      "en": "Refined Everyday"
-    },
+    "name": { "ar": "ديوان", "en": "Diwan" },
+    "type": { "ar": "عطر يومي راقٍ", "en": "Refined Everyday" },
     "price": 180,
     "size": "50 ml",
-    "note": {
-      "ar": "حمضيات • نيرولي • خشب الصندل",
-      "en": "Citrus • Neroli • Sandalwood"
-    },
+    "note": { "ar": "حمضيات • نيرولي • خشب الصندل", "en": "Citrus • Neroli • Sandalwood" },
     "image": "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=1000&q=85",
-    "tag": {
-      "ar": "أناقة يومية",
-      "en": "Everyday"
-    },
+    "tag": { "ar": "أناقة يومية", "en": "Everyday" },
     "description": {
       "ar": "انتعاش مضيء يلتقي بخشب الصندل الهادئ، لصياغة حضور يومي أنيق.",
       "en": "Bright freshness meets calm sandalwood for an effortlessly polished everyday presence."
