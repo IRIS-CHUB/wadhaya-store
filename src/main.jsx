@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ArrowDownLeft, ArrowLeft, ArrowRight, Check, ChevronDown, Globe2, Menu, Minus, Plus, ShoppingBag, Sparkles, Trash2, X } from 'lucide-react'
 import './styles.css'
-
+Remove conflicting redirects configuration
 const products = [
   { id: 'sarab', name: { ar: 'سراب', en: 'Sarab' }, type: { ar: 'عطر فاخر', en: 'Eau de Parfum' }, price: 420, size: '100 ml', note: { ar: 'عنبر دافئ • زعفران • أخشاب ثمينة', en: 'Warm amber • Saffron • Precious woods' }, image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1000&q=85', tag: { ar: 'الأكثر تميزاً', en: 'Signature' }, description: { ar: 'رحلة حسية بين دفء العنبر وغموض الصحراء عند الغروب. توقيع عطري عميق، أنيق، ولا يُنسى.', en: 'A sensory journey through warm amber and the mystery of the desert at dusk. Deep, elegant and unforgettable.' } },
   { id: 'rabdan', name: { ar: 'ربدان', en: 'Rabdan' }, type: { ar: 'عطر خشبي', en: 'Woody Perfume' }, price: 360, size: '100 ml', note: { ar: 'عود • جلد • توابل ناعمة', en: 'Oud • Leather • Soft spices' }, image: 'https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1000&q=85', tag: { ar: 'طابع شرقي', en: 'Oriental' }, description: { ar: 'شخصية واثقة تستحضر أصالة العود ونعومة الجلد، بلمسة معاصرة متوازنة.', en: 'A confident composition of authentic oud and supple leather, balanced with a contemporary touch.' } },
