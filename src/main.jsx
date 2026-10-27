@@ -22,7 +22,7 @@ const copy = {
     footerLine: 'عطور تحمل روح المكان، وتترك أثرها في كل مكان.', quickLinks: 'روابط سريعة', follow: 'تابع عالمنا', rights: 'جميع الحقوق محفوظة.',
     back: 'العودة للمتجر', productNotFound: 'لم يتم العثور على المنتج.', notes: 'النفحات العطرية', size: 'الحجم', currency: 'د.إ', qty: 'الكمية',
     top: 'النوتات العليا', middle: 'نوتات القلب', base: 'النوتات الأساسية', family: 'العائلة العطرية',
-    whatsappIntro: 'مرحباً وضايا، أرغب في طلب المنتجات التالية:', whatsappName: 'الاسم', whatsappPhone: 'رقم الهاتف', whatsappAddress: 'عنوان التوصيل', customerDetails: 'بيانات الطلب', namePlaceholder: 'الاسم الكامل', phonePlaceholder: '+971...', addressPlaceholder: 'المدينة والمنطقة والعنوان', sendOrder: 'متابعة الطلب عبر واتساب', orderHint: 'سيتم فتح واتساب لإرسال تفاصيل طلبك. لم يتم تحصيل أي مبلغ عبر الموقع.',
+    whatsappIntro: 'مرحباً وضايا، أرغب في طلب المنتجات التالية:', whatsappName: 'الاسم', whatsappPhone: 'رقم الهاتف', whatsappAddress: 'عنوان التوصيل', customerDetails: 'بيانات الطلب', namePlaceholder: 'الاسم الكامل', phonePlaceholder: '+97150870882', addressPlaceholder: 'المدينة والمنطقة والعنوان', sendOrder: 'متابعة الطلب عبر واتساب', orderHint: 'سيتم فتح واتساب لإرسال تفاصيل طلبك. لم يتم تحصيل أي مبلغ عبر الموقع.',
     toastAdded: 'أُضيف المنتج إلى الحقيبة', toastLanguage: 'Language switched to English', menu: 'القائمة', close: 'إغلاق', featured: 'مختارة لك'
   },
   en: {
