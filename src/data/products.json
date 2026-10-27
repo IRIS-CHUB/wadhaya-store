@@ -291,31 +291,5 @@
       "ar": "انتعاش الليمون الكالابري يلتقي بالورد التركي والحلقوم، ويستقر على فانيلا مكثفة ومسك أبيض وخشب الأرز.",
       "en": "Fresh Calabrian lemon meets Turkish rose and Turkish delight, resting on intense vanilla, white musk and cedarwood."
     }
-  },
-  {
-    "id": "diwan",
-    "name": {
-      "ar": "ديوان",
-      "en": "Diwan"
-    },
-    "type": {
-      "ar": "عطر يومي راقٍ",
-      "en": "Refined Everyday"
-    },
-    "price": 180,
-    "size": "50 ml",
-    "note": {
-      "ar": "حمضيات • نيرولي • خشب الصندل",
-      "en": "Citrus • Neroli • Sandalwood"
-    },
-    "image": "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=1000&q=85",
-    "tag": {
-      "ar": "أناقة يومية",
-      "en": "Everyday"
-    },
-    "description": {
-      "ar": "انتعاش مضيء يلتقي بخشب الصندل الهادئ، لصياغة حضور يومي أنيق.",
-      "en": "Bright freshness meets calm sandalwood for an effortlessly polished everyday presence."
-    }
   }
 ]
