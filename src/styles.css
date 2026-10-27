@@ -112,3 +112,67 @@
 .brand-emblem{width:54px;height:54px}
 .footer-logo .brand-emblem{width:58px;height:58px}
 @media(max-width:680px){.brand-emblem{width:43px;height:43px}.footer-logo .brand-emblem{width:48px;height:48px}}
+
+
+/* Premium editorial background refresh — deep burgundy, soft champagne light, restrained texture */
+:root{
+  --bg:#10070a;
+  --panel:#190a0f;
+  --panel2:#210d14;
+}
+html,body{
+  background-color:#10070a;
+  background-image:
+    radial-gradient(ellipse at 12% 8%,rgba(98,1,12,.24),transparent 34rem),
+    radial-gradient(ellipse at 88% 42%,rgba(188,138,53,.055),transparent 32rem),
+    linear-gradient(145deg,#10070a 0%,#16090e 48%,#0d0608 100%);
+  background-attachment:fixed;
+}
+.app{
+  position:relative;
+  isolation:isolate;
+  background:
+    radial-gradient(ellipse at 4% 34%,rgba(98,1,12,.12),transparent 30rem),
+    radial-gradient(ellipse at 96% 76%,rgba(188,138,53,.035),transparent 34rem),
+    linear-gradient(180deg,rgba(18,8,11,.12),rgba(10,4,6,.24));
+}
+.app:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.15;
+  background-image:
+    repeating-linear-gradient(135deg,transparent 0,transparent 72px,rgba(236,206,143,.045) 73px,transparent 74px),
+    radial-gradient(circle at 1px 1px,rgba(236,206,143,.11) .65px,transparent .9px);
+  background-size:auto,18px 18px;
+  mask-image:linear-gradient(to bottom,transparent 0%,black 14%,black 78%,transparent 100%);
+}
+.site-header{
+  background:linear-gradient(180deg,rgba(35,10,17,.97),rgba(16,7,10,.97));
+  backdrop-filter:blur(16px);
+}
+.collection-section{
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(98,1,12,.18),transparent 42rem),
+    linear-gradient(180deg,#1a0b10 0%,#13080c 100%);
+}
+.inner-page{
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(98,1,12,.13),transparent 36rem),
+    transparent;
+}
+.newsletter{
+  background:
+    radial-gradient(ellipse at 15% 100%,rgba(98,1,12,.22),transparent 28rem),
+    linear-gradient(110deg,#1b0a10,#200d12 52%,#16090d);
+}
+.site-footer{
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(98,1,12,.14),transparent 35rem),
+    #0c0507;
+}
+@media(prefers-reduced-motion:reduce){
+  html,body{background-attachment:scroll}
+}
