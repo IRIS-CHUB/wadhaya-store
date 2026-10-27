@@ -9,8 +9,8 @@
       "ar": "عطر فاخر",
       "en": "Eau de Parfum"
     },
-    "price": 420,
-    "size": "100 ml",
+    "price": 200,
+    "size": "50 ml",
     "note": {
       "ar": "عنبر دافئ • زعفران • أخشاب ثمينة",
       "en": "Warm amber • Saffron • Precious woods"
@@ -35,8 +35,8 @@
       "ar": "عطر خشبي",
       "en": "Woody Perfume"
     },
-    "price": 360,
-    "size": "100 ml",
+    "price": 150,
+    "size": "50 ml",
     "note": {
       "ar": "عود • جلد • توابل ناعمة",
       "en": "Oud • Leather • Soft spices"
@@ -61,8 +61,8 @@
       "ar": "عطر فاخر",
       "en": "Luxury Perfume"
     },
-    "price": 0,
-    "size": "100 ml",
+    "price": 150,
+    "size": "50 ml",
     "note": {
       "ar": "أكتب النفحات هنا",
       "en": "Add notes here"
@@ -87,8 +87,8 @@
       "ar": "عطر مسائي",
       "en": "Evening Perfume"
     },
-    "price": 390,
-    "size": "75 ml",
+    "price": 250,
+    "size": "50 ml",
     "note": {
       "ar": "ورد داكن • مسك • فانيلا",
       "en": "Dark rose • Musk • Vanilla"
@@ -113,8 +113,8 @@
       "ar": "عطر يومي راقٍ",
       "en": "Refined Everyday"
     },
-    "price": 295,
-    "size": "100 ml",
+    "price": 180,
+    "size": "50 ml",
     "note": {
       "ar": "حمضيات • نيرولي • خشب الصندل",
       "en": "Citrus • Neroli • Sandalwood"
