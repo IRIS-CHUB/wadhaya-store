@@ -58,10 +58,10 @@ function NotesBlock({ product, t, lang }) {
       {rows.map(([key, label]) => (
         <div className="notes-row" key={key}>
           <span>{label}</span>
-          <p>{n[key].map(x => <em key={x}>{x}</em>)}</p>
+          <p>{n[key].map(x => <em key={typeof x === 'string' ? x : x.en}>{typeof x === 'string' ? x : x[lang]}</em>)}</p>
         </div>
       ))}
-      {n.family && <div className="notes-row"><span>{t.family}</span><p><em>{n.family}</em></p></div>}
+      {n.family && <div className="notes-row"><span>{t.family}</span><p><em>{typeof n.family === 'string' ? n.family : n.family[lang]}</em></p></div>}
     </div>
   )
 }
@@ -130,6 +130,7 @@ function App() {
           <span className="product-price">
             {product.oldPrice && <del>{money(product.oldPrice, lang)}</del>}
             <b>{money(product.price, lang)}</b>
+            {product.oldPrice && <small className="discount-badge">−{Math.round((1 - product.price / product.oldPrice) * 100)}%</small>}
           </span>
         </div>
         <p className="product-notes">{product.note[lang]}</p>
@@ -215,7 +216,7 @@ function App() {
       {page.name === 'product' && <main className="inner-page section-pad">
         {selectedProduct ? <><button className="back-link" onClick={() => go('shop')}><ArrowRight size={16}/>{t.back}</button><div className="product-detail">
           <div className="detail-image"><img src={selectedProduct.image} alt={selectedProduct.name[lang]}/><span className="detail-stamp">W.</span></div>
-          <div className="detail-content"><p className="small-overline">{selectedProduct.type[lang]}</p><h1>{selectedProduct.name[lang]}</h1><p className="detail-price">{selectedProduct.oldPrice && <del>{money(selectedProduct.oldPrice, lang)}</del>}<b>{money(selectedProduct.price, lang)}</b></p><p className="detail-description">{selectedProduct.description[lang]}</p><div className="detail-rule"/><div className="detail-meta"><span>{t.size}</span><strong>{selectedProduct.size}</strong></div><NotesBlock product={selectedProduct} t={t} lang={lang}/><button className="button-gold detail-add" onClick={() => addToCart(selectedProduct)}>{t.add}<ShoppingBag size={17}/></button></div>
+          <div className="detail-content"><p className="small-overline">{selectedProduct.type[lang]}</p><h1>{selectedProduct.name[lang]}</h1><p className="detail-price">{selectedProduct.oldPrice && <del>{money(selectedProduct.oldPrice, lang)}</del>}<b>{money(selectedProduct.price, lang)}</b>{selectedProduct.oldPrice && <small className="discount-badge">−{Math.round((1 - selectedProduct.price / selectedProduct.oldPrice) * 100)}%</small>}</p><p className="detail-description">{selectedProduct.description[lang]}</p><div className="detail-rule"/><div className="detail-meta"><span>{t.size}</span><strong>{selectedProduct.size}</strong></div><NotesBlock product={selectedProduct} t={t} lang={lang}/><button className="button-gold detail-add" onClick={() => addToCart(selectedProduct)}>{t.add}<ShoppingBag size={17}/></button></div>
         </div></> : <p>{t.productNotFound}</p>}
       </main>}
 

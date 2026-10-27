@@ -74,3 +74,20 @@
 
 @media(max-width:1000px){.brand-logo img{width:60px;height:60px}}
 @media(max-width:680px){.brand-logo img{width:52px;height:52px}.footer-logo img{width:88px;height:88px}.main-nav{background:#170a0d}}
+
+
+/* Sale pricing and bilingual fragrance note presentation */
+.product-price{display:flex;flex-direction:column;align-items:flex-end;gap:5px;padding-top:9px}
+.product-price del,.detail-price del{display:block;color:#95877a;font-size:10px;font-weight:400;text-decoration-thickness:1px}
+.product-price b,.detail-price b{font:600 14px 'DM Sans',sans-serif;color:var(--gold-light,#e6ce8f)}
+.discount-badge{display:inline-flex;align-items:center;justify-content:center;width:max-content;padding:3px 6px;border:1px solid rgba(207,160,76,.5);background:rgba(98,1,12,.55);color:#f0d49a;font:600 9px 'DM Sans',sans-serif;letter-spacing:.03em}
+.detail-price{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.detail-price del{font-size:12px}
+.detail-price b{font-size:18px}
+.notes-block{margin-top:20px}
+.notes-block>h3{font-size:12px;font-weight:500;color:var(--gold-light,#e6ce8f);margin:0 0 14px}
+.notes-row{display:grid;grid-template-columns:minmax(90px,.7fr) minmax(0,1.8fr);gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.notes-row>span{font-size:10px;color:var(--muted,#a89d8c);line-height:1.8}
+.notes-row>p{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+.notes-row em{font-style:normal;font-size:10px;line-height:1.6;color:#e6ddce;background:rgba(255,255,255,.045);border:1px solid rgba(207,160,76,.14);padding:4px 7px}
+@media(max-width:680px){.product-price{gap:4px;padding-top:7px}.product-price b{font-size:12px}.product-price del{font-size:9px}.discount-badge{font-size:8px}.notes-row{grid-template-columns:1fr;gap:5px}.notes-row>span{font-size:9px}}
