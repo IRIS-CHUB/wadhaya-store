@@ -95,7 +95,7 @@ function App() {
       `${t.whatsappAddress}: ${customer.address}`
     ]
     // Replace with your store WhatsApp number in international format, without + or spaces.
-    const whatsappNumber = '971500000000'
+    const whatsappNumber = '971508770882'
     return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(lines.join('\n'))}`
   }, [cart, customer, lang, subtotal, t])
 
