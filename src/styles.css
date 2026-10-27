@@ -91,3 +91,13 @@
 .notes-row>p{display:flex;flex-wrap:wrap;gap:6px;margin:0}
 .notes-row em{font-style:normal;font-size:10px;line-height:1.6;color:#e6ddce;background:rgba(255,255,255,.045);border:1px solid rgba(207,160,76,.14);padding:4px 7px}
 @media(max-width:680px){.product-price{gap:4px;padding-top:7px}.product-price b{font-size:12px}.product-price del{font-size:9px}.discount-badge{font-size:8px}.notes-row{grid-template-columns:1fr;gap:5px}.notes-row>span{font-size:9px}}
+
+
+/* Brand emblem sizing overrides */
+.brand-emblem{width:44px;height:44px;border-radius:0;box-shadow:none}
+.footer-logo{align-items:center;justify-content:flex-start;gap:12px}
+.footer-logo .brand-emblem{width:48px;height:48px}
+.footer-logo .brand-wordmark{align-items:flex-start}
+.footer-logo .brand-ar{font-size:25px}
+.footer-logo .brand-en{font-size:7px}
+@media(max-width:680px){.brand-emblem{width:36px;height:36px}.brand-ar{font-size:21px}.brand-en{font-size:6px}.footer-logo .brand-emblem{width:42px;height:42px}}
