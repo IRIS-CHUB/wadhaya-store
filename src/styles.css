@@ -101,3 +101,8 @@
 .footer-logo .brand-ar{font-size:25px}
 .footer-logo .brand-en{font-size:7px}
 @media(max-width:680px){.brand-emblem{width:36px;height:36px}.brand-ar{font-size:21px}.brand-en{font-size:6px}.footer-logo .brand-emblem{width:42px;height:42px}}
+
+
+/* Uploaded WD brand monogram: recolor the burgundy artwork to the store's champagne-gold palette. */
+.brand-emblem{filter:brightness(0) saturate(100%) invert(78%) sepia(41%) saturate(546%) hue-rotate(4deg) brightness(95%) contrast(90%) drop-shadow(0 2px 8px rgba(207,160,76,.16))}
+.brand:hover .brand-emblem{filter:brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(650%) hue-rotate(4deg) brightness(103%) contrast(92%) drop-shadow(0 0 8px rgba(207,160,76,.35))}
