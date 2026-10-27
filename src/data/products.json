@@ -15,7 +15,7 @@
       "ar": "عنبر دافئ • زعفران • أخشاب ثمينة",
       "en": "Warm amber • Saffron • Precious woods"
     },
-    "image": "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1000&q=85",
+       "image": "/images/sarab.jpg"
     "tag": {
       "ar": "الأكثر تميزاً",
       "en": "Signature"
@@ -41,7 +41,7 @@
       "ar": "عود • جلد • توابل ناعمة",
       "en": "Oud • Leather • Soft spices"
     },
-    "image": "https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1000&q=85",
+       "image": "/images/rabdan.jpg"
     "tag": {
       "ar": "طابع شرقي",
       "en": "Oriental"
