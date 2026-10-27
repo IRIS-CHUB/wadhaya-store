@@ -15,7 +15,7 @@
       "ar": "عنبر دافئ • زعفران • أخشاب ثمينة",
       "en": "Warm amber • Saffron • Precious woods"
     },
-       "image": "/images/sarab.jpg"
+    "image": "/images/sarab.jpg",
     "tag": {
       "ar": "الأكثر تميزاً",
       "en": "Signature"
@@ -41,7 +41,7 @@
       "ar": "عود • جلد • توابل ناعمة",
       "en": "Oud • Leather • Soft spices"
     },
-       "image": "/images/rabdan.jpg"
+    "image": "/images/rabdan.jpg",
     "tag": {
       "ar": "طابع شرقي",
       "en": "Oriental"
@@ -49,6 +49,32 @@
     "description": {
       "ar": "شخصية واثقة تستحضر أصالة العود ونعومة الجلد، بلمسة معاصرة متوازنة.",
       "en": "A confident composition of authentic oud and supple leather, balanced with a contemporary touch."
+    }
+  },
+  {
+    "id": "zayed",
+    "name": {
+      "ar": "زايد",
+      "en": "Zayed"
+    },
+    "type": {
+      "ar": "عطر فاخر",
+      "en": "Luxury Perfume"
+    },
+    "price": 0,
+    "size": "100 ml",
+    "note": {
+      "ar": "أكتب النفحات هنا",
+      "en": "Add notes here"
+    },
+    "image": "/images/zayed.png",
+    "tag": {
+      "ar": "جديد",
+      "en": "New"
+    },
+    "description": {
+      "ar": "أكتب وصف العطر هنا.",
+      "en": "Add the fragrance description here."
     }
   },
   {
@@ -104,4 +130,3 @@
     }
   }
 ]
-
