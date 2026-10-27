@@ -5,6 +5,12 @@ import './styles.css'
 
 const products = [
   { id: 'sarab', name: { ar: 'سراب', en: 'Sarab' }, type: { ar: 'عطر فاخر', en: 'Eau de Parfum' }, price: 420, size: '100 ml', note: { ar: 'عنبر دافئ • زعفران • أخشاب ثمينة', en: 'Warm amber • Saffron • Precious woods' }, image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1000&q=85', tag: { ar: 'الأكثر تميزاً', en: 'Signature' }, description: { ar: 'رحلة حسية بين دفء العنبر وغموض الصحراء عند الغروب. توقيع عطري عميق، أنيق، ولا يُنسى.', en: 'A sensory journey through warm amber and the mystery of the desert at dusk. Deep, elegant and unforgettable.' } },
+  { id: 'rabdan', name: { ar: 'ربدان', en: 'Rabdan' }, type: { ar: 'عطر خشبي', en: 'Woody Perfume' }, price: 360, size: '100 ml', note: { ar: 'عود • جلد • توابل ناعمة', en: 'Oud • Leather • Soft spices' }, image: 'https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1000&q=85', tag: { ar: 'طابع شرقي', en: 'Oriental' }, description: { ar: 'شخصية واثقة تستحضر أصالة العود ونعومة الجلد، بلمسة معاصرة متوازنة.', en: 'A confident composition of authentic oud and supple leather, balanced with a contemporary touch.' } },
+  { id: 'layl', name: { ar: 'ليل', en: 'Layl' }, type: { ar: 'عطر مسائي', en: 'Evening Perfume' }, price: 390, size: '75 ml', note: { ar: 'ورد داكن • مسك • فانيلا', en: 'Dark rose • Musk • Vanilla' }, image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1000&q=85', tag: { ar: 'إصدار محدود', en: 'Limited' }, description: { ar: 'نفحات مخملية تتكشف بهدوء، تجمع الورد الداكن بالمسك والفانيلا الدافئة.', en: 'Velvety notes unfold slowly, blending dark rose with musk and warm vanilla.' } },
+  { id: 'diwan', name: { ar: 'ديوان', en: 'Diwan' }, type: { ar: 'عطر يومي راقٍ', en: 'Refined Everyday' }, price: 295, size: '100 ml', note: { ar: 'حمضيات • نيرولي • خشب الصندل', en: 'Citrus • Neroli • Sandalwood' }, image: 'https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=1000&q=85', tag: { ar: 'أناقة يومية', en: 'Everyday' }, description: { ar: 'انتعاش مضيء يلتقي بخشب الصندل الهادئ، لصياغة حضور يومي أنيق.', en: 'Bright freshness meets calm sandalwood for an effortlessly polished everyday presence.' } },
+]
+
+const copy = {
   ar: {
     announcement: 'تجربة عطرية تُصنع لتبقى في الذاكرة',
     navHome: 'الرئيسية', navShop: 'العطور', navStory: 'حكاية وضايا', navContact: 'تواصل معنا',
