@@ -21,6 +21,7 @@ const copy = {
     newsletterTitle: 'كن أول من يعرف', newsletterText: 'اكتشف الإصدارات الجديدة والحكايات القادمة من عالم وضايا.', newsletterPlaceholder: 'بريدك الإلكتروني', newsletterButton: 'انضم إلينا',
     footerLine: 'عطور تحمل روح المكان، وتترك أثرها في كل مكان.', quickLinks: 'روابط سريعة', follow: 'تابع عالمنا', rights: 'جميع الحقوق محفوظة.',
     back: 'العودة للمتجر', productNotFound: 'لم يتم العثور على المنتج.', notes: 'النفحات العطرية', size: 'الحجم', currency: 'د.إ', qty: 'الكمية',
+    top: 'النوتات العليا', middle: 'نوتات القلب', base: 'النوتات الأساسية', family: 'العائلة العطرية',
     whatsappIntro: 'مرحباً وضايا، أرغب في طلب المنتجات التالية:', whatsappName: 'الاسم', whatsappPhone: 'رقم الهاتف', whatsappAddress: 'عنوان التوصيل', customerDetails: 'بيانات الطلب', namePlaceholder: 'الاسم الكامل', phonePlaceholder: '+971...', addressPlaceholder: 'المدينة والمنطقة والعنوان', sendOrder: 'متابعة الطلب عبر واتساب', orderHint: 'سيتم فتح واتساب لإرسال تفاصيل طلبك. لم يتم تحصيل أي مبلغ عبر الموقع.',
     toastAdded: 'أُضيف المنتج إلى الحقيبة', toastLanguage: 'Language switched to English', menu: 'القائمة', close: 'إغلاق', featured: 'مختارة لك'
   },
@@ -39,12 +40,31 @@ const copy = {
     newsletterTitle: 'Be the first to know', newsletterText: 'Discover new releases and stories from the world of Wadhaya.', newsletterPlaceholder: 'Your email address', newsletterButton: 'Join us',
     footerLine: 'Fragrances carrying the spirit of a place, leaving an impression everywhere.', quickLinks: 'Quick links', follow: 'Follow our world', rights: 'All rights reserved.',
     back: 'Back to shop', productNotFound: 'Product not found.', notes: 'Fragrance notes', size: 'Size', currency: 'AED',
+    top: 'Top notes', middle: 'Heart notes', base: 'Base notes', family: 'Olfactive family',
     qty: 'Quantity', whatsappIntro: 'Hello Wadhaya, I would like to order the following:', whatsappName: 'Name', whatsappPhone: 'Phone number', whatsappAddress: 'Delivery address', customerDetails: 'Order details', namePlaceholder: 'Full name', phonePlaceholder: '+971...', addressPlaceholder: 'City, area and address', sendOrder: 'Continue order on WhatsApp', orderHint: 'WhatsApp will open with your order details. No payment is collected on this website.',
     toastAdded: 'Added to your bag', toastLanguage: 'تم تغيير اللغة إلى العربية', menu: 'Menu', close: 'Close', featured: 'Curated for you'
   }
 }
 
 const money = (amount, lang) => `${amount.toLocaleString(lang === 'ar' ? 'ar-AE' : 'en-AE')} ${lang === 'ar' ? 'د.إ' : 'AED'}`
+
+function NotesBlock({ product, t, lang }) {
+  const n = product.notes
+  if (!n) return <div className="detail-meta"><span>{t.notes}</span><strong>{product.note[lang]}</strong></div>
+  const rows = [['top', t.top], ['middle', t.middle], ['base', t.base]]
+  return (
+    <div className="notes-block">
+      <h3>{t.notes}</h3>
+      {rows.map(([key, label]) => (
+        <div className="notes-row" key={key}>
+          <span>{label}</span>
+          <p>{n[key].map(x => <em key={x}>{x}</em>)}</p>
+        </div>
+      ))}
+      {n.family && <div className="notes-row"><span>{t.family}</span><p><em>{n.family}</em></p></div>}
+    </div>
+  )
+}
 
 function App() {
   const [lang, setLang] = useState('ar')
@@ -107,7 +127,10 @@ function App() {
             <p className="product-type">{product.type[lang]}</p>
             <button className="product-name" onClick={() => go('product', product.id)}>{product.name[lang]}</button>
           </div>
-          <span className="product-price">{money(product.price, lang)}</span>
+          <span className="product-price">
+            {product.oldPrice && <del>{money(product.oldPrice, lang)}</del>}
+            <b>{money(product.price, lang)}</b>
+          </span>
         </div>
         <p className="product-notes">{product.note[lang]}</p>
         <button className="add-button" onClick={() => addToCart(product)}><span>{t.add}</span><Plus size={16}/></button>
@@ -192,7 +215,7 @@ function App() {
       {page.name === 'product' && <main className="inner-page section-pad">
         {selectedProduct ? <><button className="back-link" onClick={() => go('shop')}><ArrowRight size={16}/>{t.back}</button><div className="product-detail">
           <div className="detail-image"><img src={selectedProduct.image} alt={selectedProduct.name[lang]}/><span className="detail-stamp">W.</span></div>
-          <div className="detail-content"><p className="small-overline">{selectedProduct.type[lang]}</p><h1>{selectedProduct.name[lang]}</h1><p className="detail-price">{money(selectedProduct.price, lang)}</p><p className="detail-description">{selectedProduct.description[lang]}</p><div className="detail-rule"/><div className="detail-meta"><span>{t.size}</span><strong>{selectedProduct.size}</strong></div><div className="detail-meta"><span>{t.notes}</span><strong>{selectedProduct.note[lang]}</strong></div><button className="button-gold detail-add" onClick={() => addToCart(selectedProduct)}>{t.add}<ShoppingBag size={17}/></button></div>
+          <div className="detail-content"><p className="small-overline">{selectedProduct.type[lang]}</p><h1>{selectedProduct.name[lang]}</h1><p className="detail-price">{selectedProduct.oldPrice && <del>{money(selectedProduct.oldPrice, lang)}</del>}<b>{money(selectedProduct.price, lang)}</b></p><p className="detail-description">{selectedProduct.description[lang]}</p><div className="detail-rule"/><div className="detail-meta"><span>{t.size}</span><strong>{selectedProduct.size}</strong></div><NotesBlock product={selectedProduct} t={t} lang={lang}/><button className="button-gold detail-add" onClick={() => addToCart(selectedProduct)}>{t.add}<ShoppingBag size={17}/></button></div>
         </div></> : <p>{t.productNotFound}</p>}
       </main>}
 
