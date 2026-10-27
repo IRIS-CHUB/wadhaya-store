@@ -150,9 +150,12 @@ function App() {
           <button onClick={() => go('story')}>{t.navStory}</button>
           <button onClick={() => go('contact')}>{t.navContact}</button>
         </nav>
-        <button className="brand" onClick={() => go('home')} aria-label="Wadhaya home">
-          <span className="brand-ar">وَضَايَا</span>
-          <span className="brand-en">W A D H A Y A</span>
+        <button className="brand" onClick={() => go('home')} aria-label="Wadhaya | وضايا — home">
+          <img className="brand-emblem" src="/wadhaya-emblem.svg" alt="" />
+          <span className="brand-wordmark">
+            <span className="brand-ar">وَضَايَا</span>
+            <span className="brand-en">W A D H A Y A</span>
+          </span>
         </button>
         <div className="header-actions">
           <button className="language-button" onClick={switchLang}><Globe2 size={16}/><span>{isAr ? 'EN' : 'عربي'}</span></button>
@@ -225,7 +228,7 @@ function App() {
       {page.name === 'contact' && <main className="inner-page section-pad contact-page"><p className="small-overline">{t.navContact}</p><h1>{isAr ? 'يسعدنا تواصلك.' : 'We would love to hear from you.'}</h1><p>{isAr ? 'للاستفسارات حول العطور أو الطلبات، تواصل معنا عبر واتساب.' : 'For fragrance and order enquiries, reach us on WhatsApp.'}</p><a className="button-gold link-button" href="https://wa.me/971508770882" target="_blank" rel="noreferrer">{isAr ? 'تواصل عبر واتساب' : 'Chat on WhatsApp'}<ArrowLeft size={17}/></a><p className="contact-note">{isAr ? 'يرجى استبدال رقم واتساب التجريبي برقم متجرك قبل الإطلاق.' : 'Please replace the placeholder WhatsApp number with your store number before launch.'}</p></main>}
 
       <footer className="site-footer" id="contact">
-        <div className="footer-main"><div className="footer-brand"><button className="brand footer-logo" onClick={() => go('home')}><span className="brand-ar">وَضَايَا</span><span className="brand-en">W A D H A Y A</span></button><p>{t.footerLine}</p></div><div className="footer-links"><h4>{t.quickLinks}</h4><button onClick={() => go('home')}>{t.navHome}</button><button onClick={() => go('shop')}>{t.navShop}</button><button onClick={() => go('story')}>{t.navStory}</button><button onClick={() => go('contact')}>{t.navContact}</button></div><div className="footer-social"><h4>{t.follow}</h4><a href="https://instagram.com/" target="_blank" rel="noreferrer">Instagram <ArrowDownLeft size={14}/></a><a href="https://wa.me/971508770882" target="_blank" rel="noreferrer">WhatsApp <ArrowDownLeft size={14}/></a></div></div>
+        <div className="footer-main"><div className="footer-brand"><button className="brand footer-logo" onClick={() => go('home')} aria-label="Wadhaya home"><img className="brand-emblem" src="/wadhaya-emblem.svg" alt="" /><span className="brand-wordmark"><span className="brand-ar">وَضَايَا</span><span className="brand-en">W A D H A Y A</span></span></button><p>{t.footerLine}</p></div><div className="footer-links"><h4>{t.quickLinks}</h4><button onClick={() => go('home')}>{t.navHome}</button><button onClick={() => go('shop')}>{t.navShop}</button><button onClick={() => go('story')}>{t.navStory}</button><button onClick={() => go('contact')}>{t.navContact}</button></div><div className="footer-social"><h4>{t.follow}</h4><a href="https://instagram.com/" target="_blank" rel="noreferrer">Instagram <ArrowDownLeft size={14}/></a><a href="https://wa.me/971508770882" target="_blank" rel="noreferrer">WhatsApp <ArrowDownLeft size={14}/></a></div></div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} Wadhaya. {t.rights}</span><span>MADE WITH INTENTION · UAE</span></div>
       </footer>
 
