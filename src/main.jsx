@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ArrowDownLeft, ArrowLeft, ArrowRight, Check, ChevronDown, Globe2, Menu, Minus, Plus, ShoppingBag, Sparkles, Trash2, X } from 'lucide-react'
 import './styles.css'
@@ -67,9 +67,23 @@ function NotesBlock({ product, t, lang }) {
 }
 
 function App() {
-  const [lang, setLang] = useState('ar')
+  const [lang, setLang] = useState(() => {
+    try {
+      const saved = window.localStorage.getItem('wadhaya-language')
+      return saved === 'en' ? 'en' : 'ar'
+    } catch {
+      return 'ar'
+    }
+  })
   const [page, setPage] = useState({ name: 'home', id: null })
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState(() => {
+    try {
+      const saved = JSON.parse(window.localStorage.getItem('wadhaya-cart') || '[]')
+      return Array.isArray(saved) ? saved.filter(item => item && item.id && Number.isFinite(item.price) && Number.isInteger(item.qty) && item.qty > 0) : []
+    } catch {
+      return []
+    }
+  })
   const [cartOpen, setCartOpen] = useState(false)
   const [mobileMenu, setMobileMenu] = useState(false)
   const [toast, setToast] = useState('')
@@ -81,6 +95,22 @@ function App() {
   const selectedProduct = products.find(p => p.id === page.id)
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0)
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0)
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem('wadhaya-cart', JSON.stringify(cart))
+    } catch {
+      // Keep shopping usable if browser storage is unavailable.
+    }
+  }, [cart])
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem('wadhaya-language', lang)
+    } catch {
+      // Language selection still works for the current session.
+    }
+  }, [lang])
 
   const go = (name, id = null) => {
     setPage({ name, id })
