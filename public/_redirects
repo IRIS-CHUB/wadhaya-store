@@ -1,1 +1,0 @@
-# SPA fallback is handled by Cloudflare Workers Static Assets because dist/index.html is present.
