@@ -112,3 +112,8 @@
 .brand-emblem{width:54px;height:54px}
 .footer-logo .brand-emblem{width:58px;height:58px}
 @media(max-width:680px){.brand-emblem{width:43px;height:43px}.footer-logo .brand-emblem{width:48px;height:48px}}
+
+/* Social links: platform logos sit beside each label under Follow our world. */
+.footer-social a{display:flex;align-items:center;gap:9px}
+.footer-social .social-logo{width:17px;height:17px;flex:0 0 17px}
+.footer-social a span{flex:1}
