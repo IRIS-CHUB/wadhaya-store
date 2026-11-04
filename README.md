@@ -27,20 +27,19 @@ Vite serves the storefront, but authentication endpoints require a local Worker 
 
 ## Cloudflare setup (first deployment)
 1. Install dependencies: `npm install`.
-2. Create or allow Wrangler to provision the D1 database named `wadhaya-store-db` when deploying.
-3. Apply the migration:
-   ```bash
-   npx wrangler d1 migrations apply wadhaya-store-db --remote
-   ```
-4. Set the Worker secrets. Generate long random values; do not commit them:
+2. Set the Worker secrets. Generate long random values; do not commit them:
    ```bash
    npx wrangler secret put PASSWORD_PEPPER
    npx wrangler secret put ADMIN_SETUP_TOKEN
    ```
    Use different values, each at least 32 random bytes. Keep the setup token available only for the one-time account creation.
-5. Deploy the Worker and static assets:
+4. Deploy the Worker and static assets once. Wrangler can provision the D1 database from the binding in `wrangler.jsonc`:
    ```bash
    npm run deploy
+   ```
+5. Apply the migration to the newly provisioned database:
+   ```bash
+   npx wrangler d1 migrations apply wadhaya-store-db --remote
    ```
 6. Visit `https://YOUR-DOMAIN/admin.html`, choose **إعداد أول حساب مدير**, and provide your email, a password of at least 12 characters, and the setup token.
 7. After successful setup, remove the setup secret:
