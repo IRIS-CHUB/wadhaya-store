@@ -7,9 +7,9 @@
     "dev": "vite",
     "build": "vite build && node --input-type=module -e \"import('node:fs').then(fs => fs.rmSync('dist/_redirects', { force: true }))\"",
     "preview": "vite preview",
-    "deploy": "npm run build && wrangler deploy",
-    "db:migrate:local": "wrangler d1 migrations apply wadhaya-store-db --local",
-    "db:migrate:remote": "wrangler d1 migrations apply wadhaya-store-db --remote"
+    "deploy": "npm run build && npx wrangler@4.153.0 deploy",
+    "db:migrate:local": "npx wrangler@4.153.0 d1 migrations apply wadhaya-store-db --local",
+    "db:migrate:remote": "npx wrangler@4.153.0 d1 migrations apply wadhaya-store-db --remote"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
