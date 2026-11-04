@@ -1,50 +1,61 @@
-# Wadhaya Store — React + Vite
+# Wadhaya Store — React + Vite + Cloudflare Workers
 
-A luxury bilingual (Arabic/English) perfume storefront prepared for Cloudflare Pages.
+Luxury bilingual (Arabic/English) perfume storefront with WhatsApp checkout and a private administrator sign-in.
 
-## Features
-- Arabic RTL / English LTR language toggle
-- Home, collection, product detail, story and contact views
-- Product cards and shopping bag with quantity controls
-- WhatsApp order handoff with customer name, phone and delivery address
-- Responsive dark and champagne-gold design
-- Vite production build and Cloudflare Pages SPA fallback
+## Existing storefront
+- Arabic RTL / English LTR storefront
+- Product catalogue, product detail pages and shopping bag
+- WhatsApp order handoff
+- Existing images and styling retained
 
-## Requirements
-- Node.js LTS
-- npm
+## Administrator authentication
+- Open `/admin.html`.
+- Only an administrator account is accepted; there is no customer registration.
+- Passwords are hashed with PBKDF2-HMAC-SHA-256 and a server-only pepper.
+- Sessions use random opaque tokens; only SHA-256 token hashes are stored in D1.
+- Session cookies are HttpOnly, SameSite=Strict and Secure on HTTPS.
+- Login attempts are rate-limited per IP/email key.
+- The one-time setup endpoint is disabled after the first administrator exists.
 
-## Run locally
+## Local development
 ```bash
 npm install
 npm run dev
 ```
 
-## Production build
-```bash
-npm run build
-npm run preview
-```
-The production site is generated in `dist/`.
+Vite serves the storefront, but authentication endpoints require a local Worker runtime and D1 binding. Use Wrangler for an end-to-end local auth test.
 
-## Before publishing
-1. Open `src/main.jsx` and replace every `971500000000` placeholder with your actual WhatsApp number in international format, digits only (no plus sign or spaces).
-2. Replace demo product prices, names, sizes, notes and descriptions with your real product information.
-3. Replace demo Unsplash image URLs with product photography you own or have permission to use.
-4. Update Instagram and contact links in the footer.
-5. The newsletter form is a front-end demo only; connect a mailing-list service if you want to store subscriptions.
-6. This storefront does not collect online payments or automatically manage stock. Orders are handed off to WhatsApp.
-7. Review shipping, returns, privacy and business/legal information before launching.
+## Cloudflare setup (first deployment)
+1. Install dependencies: `npm install`.
+2. Create or allow Wrangler to provision the D1 database named `wadhaya-store-db` when deploying.
+3. Apply the migration:
+   ```bash
+   npx wrangler d1 migrations apply wadhaya-store-db --remote
+   ```
+4. Set the Worker secrets. Generate long random values; do not commit them:
+   ```bash
+   npx wrangler secret put PASSWORD_PEPPER
+   npx wrangler secret put ADMIN_SETUP_TOKEN
+   ```
+   Use different values, each at least 32 random bytes. Keep the setup token available only for the one-time account creation.
+5. Deploy the Worker and static assets:
+   ```bash
+   npm run deploy
+   ```
+6. Visit `https://YOUR-DOMAIN/admin.html`, choose **إعداد أول حساب مدير**, and provide your email, a password of at least 12 characters, and the setup token.
+7. After successful setup, remove the setup secret:
+   ```bash
+   npx wrangler secret delete ADMIN_SETUP_TOKEN
+   ```
+8. Test login, logout, and `GET /api/admin/me`. Keep the admin URL and account details private.
 
-## Deploy to Cloudflare Pages
-1. Push this project to a GitHub repository.
-2. In Cloudflare Dashboard, open **Workers & Pages** and create a Pages project connected to your repository.
-3. Use build command `npm run build` and output directory `dist`.
-4. Deploy, then add your domain under **Custom domains** and follow Cloudflare's DNS instructions.
+Wrangler may create the D1 database automatically from the binding on deployment. If it does, confirm the database is visible in Cloudflare and that the migration has been applied before using admin authentication.
 
-The `public/_redirects` file enables SPA fallback routing on Cloudflare Pages.
+## Important deployment note
+This branch changes deployment from a static Pages-only build to a Worker with static assets and D1. Do not replace the current production deployment until the D1 database, secrets, custom domain routing and smoke tests are complete. Preserve the existing production project as rollback until then.
 
-## Notes
-- Product images are loaded from Unsplash URLs and require internet access.
-- Google Fonts are loaded from Google Fonts.
-- No Base44 SDK or Base44 services are used.
+## Security notes
+- Never put passwords, setup tokens, or the password pepper in Vite environment variables or browser code.
+- The setup token is one-time and the endpoint refuses setup after an admin account exists.
+- Keep Cloudflare account access protected with MFA.
+- Online payments, product CRUD APIs and order persistence are not included in this authentication foundation yet.
