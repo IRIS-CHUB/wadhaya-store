@@ -12,7 +12,7 @@
     "db:migrate:remote": "wrangler d1 migrations apply wadhaya-store-db --remote"
   },
   "dependencies": {
-    "lucide-react": "^0.468.0",
+    "lucide-react": "^1.66.0",
     "react": "^19.3.1",
     "react-dom": "^18.3.1"
   },
