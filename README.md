@@ -27,7 +27,12 @@ Vite serves the storefront, but authentication endpoints require a local Worker 
 
 ## Cloudflare setup (first deployment)
 1. Install dependencies: `npm install`.
-2. Set the Worker secrets. Generate long random values; do not commit them:
+2. Create the D1 database in the repository root:
+   ```bash
+   npx wrangler@4.153.0 d1 create wadhaya-store-db
+   ```
+   Copy the returned `database_id` into the `d1_databases[0].database_id` field in `wrangler.jsonc`, then commit that non-secret ID.
+3. Set the Worker secrets. Generate long random values; do not commit them:
    ```bash
    npx wrangler secret put PASSWORD_PEPPER
    npx wrangler secret put ADMIN_SETUP_TOKEN

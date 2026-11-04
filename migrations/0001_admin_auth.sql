@@ -23,3 +23,6 @@ CREATE TABLE IF NOT EXISTS login_attempts (
   attempts INTEGER NOT NULL,
   window_started INTEGER NOT NULL
 );
+
+-- Only one administrator account may ever be created.
+CREATE UNIQUE INDEX IF NOT EXISTS users_single_admin_idx ON users(role) WHERE role = 'admin';

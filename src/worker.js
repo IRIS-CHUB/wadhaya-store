@@ -71,9 +71,11 @@ function constantTimeEqual(a, b) {
 }
 
 async function readJson(request) {
-  const length = Number(request.headers.get("Content-Length") || 0);
-  if (length > 4096) throw new Error("Request too large");
-  return await request.json();
+  const contentType = request.headers.get("Content-Type") || "";
+  if (!contentType.toLowerCase().includes("application/json")) throw new Error("Expected JSON request.");
+  const body = await request.text();
+  if (new TextEncoder().encode(body).byteLength > 4096) throw new Error("Request too large");
+  return JSON.parse(body);
 }
 
 function sameOrigin(request, url) {
@@ -125,8 +127,12 @@ async function handleAuth(request, env, url) {
     const record = await makePasswordRecord(password, env.PASSWORD_PEPPER);
     const id = crypto.randomUUID();
     const now = Math.floor(Date.now() / 1000);
-    await env.DB.prepare("INSERT INTO users (id, email, password_hash, password_salt, password_iterations, role, created_at) VALUES (?, ?, ?, ?, ?, 'admin', ?)")
-      .bind(id, email, record.hash, record.salt, record.iterations, now).run();
+    try {
+      await env.DB.prepare("INSERT INTO users (id, email, password_hash, password_salt, password_iterations, role, created_at) VALUES (?, ?, ?, ?, ?, 'admin', ?)")
+        .bind(id, email, record.hash, record.salt, record.iterations, now).run();
+    } catch {
+      return json({ error: "Admin setup has already been completed." }, 409);
+    }
     const token = await createSession(env.DB, id);
     return json({ ok: true }, 201, { "Set-Cookie": setSessionCookie(url, token) });
   }
