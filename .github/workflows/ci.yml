@@ -24,5 +24,7 @@ jobs:
         run: npm ci
       - name: Check production dependencies for high-severity vulnerabilities
         run: npm audit --omit=dev --audit-level=high
+      - name: Validate product data and local assets
+        run: npm run validate:catalog
       - name: Build production site
         run: npm run build
