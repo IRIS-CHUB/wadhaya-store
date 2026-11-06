@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ArrowDownLeft, ArrowLeft, ArrowRight, Check, ChevronDown, Globe2, Menu, Minus, Plus, ShoppingBag, Sparkles, Trash2, X } from 'lucide-react'
 import './styles.css'
