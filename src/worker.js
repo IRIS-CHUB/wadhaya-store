@@ -71,11 +71,11 @@ function constantTimeEqual(a, b) {
   return diff === 0;
 }
 
-async function readJson(request) {
+async function readJson(request, maxBytes = 4096) {
   const contentType = request.headers.get("Content-Type") || "";
   if (!contentType.toLowerCase().includes("application/json")) throw new Error("Expected JSON request.");
   const body = await request.text();
-  if (new TextEncoder().encode(body).byteLength > 4096) throw new Error("Request too large");
+  if (new TextEncoder().encode(body).byteLength > maxBytes) throw new Error("Request too large");
   return JSON.parse(body);
 }
 
@@ -214,7 +214,7 @@ export default {
       }
       if (request.method === "PUT" && url.pathname === "/api/admin/products") {
         if (!sameOrigin(request, url)) return json({ error: "Invalid request origin." }, 403);
-        const body = await readJson(request);
+        const body = await readJson(request, 200000);
         if (!Array.isArray(body.products) || body.products.length > 100) return json({ error: "قائمة المنتجات غير صالحة." }, 400);
         const ids = new Set();
         for (const p of body.products) {
