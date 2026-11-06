@@ -215,7 +215,7 @@ function App() {
 
       {page.name === 'shop' && <main className="inner-page section-pad">
         <div className="page-intro"><p className="small-overline">{t.collectionEyebrow}</p><h1>{t.collectionTitle}</h1><p>{t.collectionText}</p></div>
-        <div className="product-grid shop-grid">{products.map((product, i) => <ProductCard product={product} index={i} key={product.id}/>)}</div>
+        <div className="product-grid shop-grid">{catalog.map((product, i) => <ProductCard product={product} index={i} key={product.id}/>)}</div>
       </main>}
 
       {page.name === 'product' && <main className="inner-page section-pad">
