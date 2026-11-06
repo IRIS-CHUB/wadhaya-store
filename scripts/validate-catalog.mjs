@@ -52,7 +52,7 @@ for (const [index, product] of products.entries()) {
 }
 
 const css = await readFile(path.join(root, 'src/styles.css'), 'utf8');
-const localUrls = [...css.matchAll(/url\\(\\s*['"]?(\\/[^)'"]+)['"]?\\s*\\)/g)].map(match => match[1]);
+const localUrls = [...css.matchAll(/url\(([^)]+)\)/g)].map(([, value]) => value.trim().replace(/^['"]|['"]$/g, '')).filter(value => value.startsWith('/'));
 for (const url of localUrls) {
   const assetPath = path.join(root, 'public', url.slice(1));
   try {
