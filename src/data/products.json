@@ -291,5 +291,117 @@
       "ar": "انتعاش الليمون الكالابري يلتقي بالورد التركي والحلقوم، ويستقر على فانيلا مكثفة ومسك أبيض وخشب الأرز.",
       "en": "Fresh Calabrian lemon meets Turkish rose and Turkish delight, resting on intense vanilla, white musk and cedarwood."
     }
+  },
+  {
+    "id": "dukhoon-wahaj",
+    "category": "dukhoon",
+    "name": {
+      "ar": "دخون وهج",
+      "en": "Wahaj Dukhoon"
+    },
+    "type": {
+      "ar": "دخون",
+      "en": "Traditional Incense"
+    },
+    "oldPrice": 150,
+    "price": 100,
+    "size": "—",
+    "note": {
+      "ar": "دخون وضايا",
+      "en": "Wadhaya traditional incense"
+    },
+    "image": "/images/zayed.png",
+    "tag": {
+      "ar": "مجموعة الدخون",
+      "en": "Dukhoon Collection"
+    },
+    "description": {
+      "ar": "دخون وهج من مجموعة وضايا.",
+      "en": "Wahaj from the Wadhaya Dukhoon collection."
+    }
+  },
+  {
+    "id": "dukhoon-diwan",
+    "category": "dukhoon",
+    "name": {
+      "ar": "دخون الديوان",
+      "en": "Al Diwan Dukhoon"
+    },
+    "type": {
+      "ar": "دخون",
+      "en": "Traditional Incense"
+    },
+    "oldPrice": 150,
+    "price": 90,
+    "size": "—",
+    "note": {
+      "ar": "دخون وضايا",
+      "en": "Wadhaya traditional incense"
+    },
+    "image": "/images/zayed.png",
+    "tag": {
+      "ar": "مجموعة الدخون",
+      "en": "Dukhoon Collection"
+    },
+    "description": {
+      "ar": "دخون الديوان من مجموعة وضايا.",
+      "en": "Al Diwan from the Wadhaya Dukhoon collection."
+    }
+  },
+  {
+    "id": "dukhoon-dhabi",
+    "category": "dukhoon",
+    "name": {
+      "ar": "دخون الظبي",
+      "en": "Al Dhabi Dukhoon"
+    },
+    "type": {
+      "ar": "دخون",
+      "en": "Traditional Incense"
+    },
+    "oldPrice": 200,
+    "price": 110,
+    "size": "—",
+    "note": {
+      "ar": "دخون وضايا",
+      "en": "Wadhaya traditional incense"
+    },
+    "image": "/images/zayed.png",
+    "tag": {
+      "ar": "مجموعة الدخون",
+      "en": "Dukhoon Collection"
+    },
+    "description": {
+      "ar": "دخون الظبي من مجموعة وضايا.",
+      "en": "Al Dhabi from the Wadhaya Dukhoon collection."
+    }
+  },
+  {
+    "id": "dukhoon-almaha",
+    "category": "dukhoon",
+    "name": {
+      "ar": "دخون ألمها",
+      "en": "Al Maha Dukhoon"
+    },
+    "type": {
+      "ar": "دخون",
+      "en": "Traditional Incense"
+    },
+    "oldPrice": 150,
+    "price": 90,
+    "size": "—",
+    "note": {
+      "ar": "دخون وضايا",
+      "en": "Wadhaya traditional incense"
+    },
+    "image": "/images/zayed.png",
+    "tag": {
+      "ar": "مجموعة الدخون",
+      "en": "Dukhoon Collection"
+    },
+    "description": {
+      "ar": "دخون ألمها من مجموعة وضايا.",
+      "en": "Al Maha from the Wadhaya Dukhoon collection."
+    }
   }
 ]
