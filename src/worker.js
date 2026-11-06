@@ -1,3 +1,4 @@
+import defaultProducts from "./data/products.json";
 const SESSION_TTL = 60 * 60 * 12;
 const PBKDF2_ITERATIONS = 600000;
 const COOKIE = "__Host-wadhaya_session";
@@ -194,9 +195,38 @@ export default {
       }
     }
 
+    if (url.pathname === "/api/products" && request.method === "GET") {
+      try {
+        const rows = await env.DB.prepare("SELECT product_json FROM products ORDER BY sort_order, id").all();
+        return json({ products: rows.results.map((row) => JSON.parse(row.product_json)) });
+      } catch { return json({ products: defaultProducts }); }
+    }
     if (url.pathname.startsWith("/api/admin/")) {
       const admin = await getAdmin(request, env, url);
       if (!admin) return json({ error: "Unauthorized." }, 401);
+      if (request.method === "GET" && url.pathname === "/api/admin/products") {
+        let rows = await env.DB.prepare("SELECT product_json FROM products ORDER BY sort_order, id").all();
+        if (!rows.results.length) {
+          await env.DB.batch(defaultProducts.map((product, index) => env.DB.prepare("INSERT OR IGNORE INTO products (id, product_json, sort_order, updated_at) VALUES (?, ?, ?, ?)").bind(product.id, JSON.stringify(product), index, Math.floor(Date.now() / 1000))));
+          rows = await env.DB.prepare("SELECT product_json FROM products ORDER BY sort_order, id").all();
+        }
+        return json({ products: rows.results.map((row) => JSON.parse(row.product_json)) });
+      }
+      if (request.method === "PUT" && url.pathname === "/api/admin/products") {
+        if (!sameOrigin(request, url)) return json({ error: "Invalid request origin." }, 403);
+        const body = await readJson(request);
+        if (!Array.isArray(body.products) || body.products.length > 100) return json({ error: "قائمة المنتجات غير صالحة." }, 400);
+        const ids = new Set();
+        for (const p of body.products) {
+          if (!p || typeof p.id !== "string" || !/^[a-z0-9-]{2,50}$/i.test(p.id) || ids.has(p.id) || !p.name?.ar || !p.name?.en || !p.type?.ar || !p.type?.en || !Number.isFinite(Number(p.price)) || Number(p.price) < 0 || Number(p.price) > 100000 || typeof p.image !== "string" || p.image.length > 1000) return json({ error: "تأكد من الاسم والسعر والصورة ومعرّف كل منتج." }, 400);
+          ids.add(p.id);
+        }
+        const now = Math.floor(Date.now() / 1000);
+        const statements = [env.DB.prepare("DELETE FROM products")];
+        body.products.forEach((p, index) => statements.push(env.DB.prepare("INSERT INTO products (id, product_json, sort_order, updated_at) VALUES (?, ?, ?, ?)").bind(p.id, JSON.stringify(p), index, now)));
+        await env.DB.batch(statements);
+        return json({ ok: true, products: body.products });
+      }
       if (request.method === "GET" && url.pathname === "/api/admin/me") {
         return json({ authenticated: true, admin: { email: admin.email } });
       }
