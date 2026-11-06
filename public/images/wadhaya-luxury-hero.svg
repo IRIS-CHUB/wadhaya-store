@@ -25,7 +25,7 @@
  <path d="M225 510q80 25 160 0" stroke="#ffe2a0" stroke-opacity=".5" stroke-width="3" fill="none"/>
  <rect x="220" y="560" width="170" height="115" rx="4" fill="#1a0c0a" fill-opacity=".72" stroke="#d8ad66" stroke-opacity=".8"/>
  <path d="M292 586q-25 26 0 48q25-22 0-48m0 8q-30 18-8 38m8-38q30 18 8 38" stroke="url(#gold)" stroke-width="5" fill="none"/>
- <text x="305" y="650" fill="#e8c47f" text-anchor="middle" font-family="Georgia,serif" font-size="23" letter-spacing="4">WADHAYA</text>
+ <text x="305" y="650" fill="#e8c47f" text-anchor="middle" font-family="Georgia,serif" font-size="23" letter-spacing="3">SARAB</text>
 </g>
 <g filter="url(#shadow)">
  <path d="M480 300h270l34 88v355q0 65-65 65H511q-65 0-65-65V388Z" fill="url(#glass)" stroke="url(#gold)" stroke-width="7"/>
@@ -36,7 +36,7 @@
  <path d="M475 425q155 35 300 0" stroke="#ffe5ac" stroke-opacity=".5" stroke-width="4" fill="none"/>
  <rect x="492" y="510" width="246" height="145" rx="5" fill="#130b09" fill-opacity=".8" stroke="#d7a75d" stroke-width="2"/>
  <path d="M615 535q-36 38 0 68q36-30 0-68m0 12q-44 25-12 55m12-55q44 25 12 55" stroke="url(#gold)" stroke-width="6" fill="none"/>
- <text x="615" y="635" fill="#e8c47f" text-anchor="middle" font-family="Georgia,serif" font-size="28" letter-spacing="5">WADHAYA</text>
+ <text x="615" y="635" fill="#e8c47f" text-anchor="middle" font-family="Georgia,serif" font-size="28" letter-spacing="4">RABDAN</text>
 </g>
 <g filter="url(#shadow)">
  <path d="M810 465h150l22 58v235q0 45-45 45H833q-45 0-45-45V523Z" fill="url(#glass)" stroke="url(#gold)" stroke-width="5"/>
@@ -45,7 +45,7 @@
  <path d="M860 375v-60h50v60" fill="url(#gold)"/>
  <rect x="818" y="575" width="135" height="90" fill="#150c0a" stroke="#d7a75d"/>
  <path d="M885 591q-22 24 0 43q22-19 0-43" stroke="url(#gold)" stroke-width="4" fill="none"/>
- <text x="885" y="649" fill="#e8c47f" text-anchor="middle" font-family="Georgia,serif" font-size="15" letter-spacing="2">WADHAYA</text>
+ <text x="885" y="649" fill="#e8c47f" text-anchor="middle" font-family="Georgia,serif" font-size="15" letter-spacing="1">ZAYED</text>
 </g>
 <g fill="none" stroke="#e2c18b" stroke-opacity=".5" stroke-width="3"><path d="M1050 900q90-80 130-10q-65 40-130 10m40-22q-5-85 55-100q30 60-55 100m-10 10q-65-70-110-30q35 65 110 30"/><path d="M1010 940q50-65 105-35m-15-20q20-55 60-55"/></g>
 <rect x="1100" width="700" height="1000" fill="url(#bg)" opacity=".28"/>
