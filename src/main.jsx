@@ -13,7 +13,7 @@ const copy = {
     explore: 'اكتشف المجموعة', ourStory: 'حكاية وضايا', scroll: 'اكتشف عالمنا',
     craftLabel: 'صُنعت بحسّ مختلف', craftTitle: 'الفخامة في التفاصيل.', craftText: 'من أول نفحة إلى آخر أثر، نؤمن أن العطر لغة صامتة تحكي قصتك دون كلمات. مكونات مختارة، وتوازن مدروس، وحضور لا يحتاج إلى إعلان.',
     craftPoints: ['مكونات منتقاة بعناية', 'توقيعات عطرية مميزة', 'تفاصيل مستوحاة من تراثنا'],
-    collectionEyebrow: 'توقيعات وضايا', collectionTitle: 'اكتشف مجموعتنا', collectionText: 'أربع شخصيات عطرية، لكل منها حكايتها الخاصة.', viewAll: 'عرض المجموعة',
+    collectionEyebrow: 'توقيعات وضايا', collectionTitle: 'اكتشف مجموعتنا', collectionText: 'ثلاث شخصيات عطرية، لكل منها حكايتها الخاصة.', viewAll: 'عرض المجموعة',
     add: 'أضف إلى الحقيبة', details: 'التفاصيل', cart: 'حقيبة التسوق', empty: 'حقيبتك فارغة حالياً', emptyText: 'اكتشف عطور وضايا واختر عطرك القادم.', continue: 'استكشف العطور',
     subtotal: 'المجموع', shipping: 'الشحن', shippingText: 'يُحدد عند تأكيد الطلب', checkout: 'اطلب عبر واتساب', remove: 'حذف', totalItems: 'منتجات',
     storyEyebrow: 'روح المكان', storyTitle: 'من رمال الصحراء\\nإلى ذاكرة العطر.', storyText: 'وُلدت وضايا من شغف بالتفاصيل العربية الأصيلة؛ من دفء العود، وهدوء الرمال، وبريق الذهب المطفي. نصنع عطوراً لا تتبع اللحظة، بل تترك بصمتها الخاصة.',
@@ -32,7 +32,7 @@ const copy = {
     explore: 'Explore the collection', ourStory: 'The Wadhaya story', scroll: 'Discover our world',
     craftLabel: 'Crafted with intention', craftTitle: 'Luxury lives in the details.', craftText: 'From the first note to the final trail, we believe fragrance is a silent language that tells your story. Considered ingredients, thoughtful balance and a presence that needs no announcement.',
     craftPoints: ['Thoughtfully selected ingredients', 'Distinctive olfactory signatures', 'Details inspired by our heritage'],
-    collectionEyebrow: 'Wadhaya signatures', collectionTitle: 'Discover the collection', collectionText: 'Four fragrance personalities, each with a story of its own.', viewAll: 'View collection',
+    collectionEyebrow: 'Wadhaya signatures', collectionTitle: 'Discover the collection', collectionText: 'Three fragrance personalities, each with a story of its own.', viewAll: 'View collection',
     add: 'Add to bag', details: 'Discover', cart: 'Your bag', empty: 'Your bag is currently empty', emptyText: 'Explore Wadhaya fragrances and find your next signature.', continue: 'Explore fragrances',
     subtotal: 'Subtotal', shipping: 'Shipping', shippingText: 'Confirmed with your order', checkout: 'Order via WhatsApp', remove: 'Remove', totalItems: 'items',
     storyEyebrow: 'A sense of place', storyTitle: 'From desert sands\\nto the memory of scent.', storyText: 'Wadhaya was born from a devotion to authentic Arabian details: the warmth of oud, the stillness of sand and the glow of matte gold. We create fragrances that go beyond the moment and leave a signature of their own.',
@@ -195,7 +195,7 @@ function App() {
             <div><p className="small-overline">{t.collectionEyebrow}</p><h2>{t.collectionTitle}</h2><p className="muted">{t.collectionText}</p></div>
             <button className="underlined-link" onClick={() => go('shop')}>{t.viewAll}<ArrowLeft size={16}/></button>
           </div>
-          <div className="product-grid">{products.slice(0, 4).map((product, i) => <ProductCard product={product} index={i} key={product.id}/>)}</div>
+          <div className="product-grid">{catalog.slice(0, 4).map((product, i) => <ProductCard product={product} index={i} key={product.id}/>)}</div>
         </section>
 
         <section className="story-banner">
