@@ -67,6 +67,8 @@ function NotesBlock({ product, t, lang }) {
 }
 
 function App() {
+  const [catalog, setCatalog] = useState(products)
+  useEffect(() => { fetch('/api/products').then(r => r.ok ? r.json() : null).then(data => { if (Array.isArray(data?.products) && data.products.length) setCatalog(data.products) }).catch(() => {}) }, [])
   const [lang, setLang] = useState('ar')
   const [page, setPage] = useState({ name: 'home', id: null })
   const [cart, setCart] = useState([])
@@ -78,7 +80,7 @@ function App() {
   const t = copy[lang]
   const isAr = lang === 'ar'
   const dir = isAr ? 'rtl' : 'ltr'
-  const selectedProduct = products.find(p => p.id === page.id)
+  const selectedProduct = catalog.find(p => p.id === page.id)
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0)
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0)
 
