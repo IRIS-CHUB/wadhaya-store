@@ -220,8 +220,8 @@ function App() {
       </main>}
 
       {page.name === 'dukhoon' && <main className="inner-page section-pad dukhoon-page">
-        <div className="dukhoon-visual" aria-hidden="true"><span className="dukhoon-orbit orbit-one"/><span className="dukhoon-orbit orbit-two"/><span className="dukhoon-emblem">و</span><span className="dukhoon-caption">WADHAYA · HERITAGE</span></div>
-        <div className="dukhoon-content"><p className="small-overline">WADHAYA · TRADITIONAL INCENSE</p><h1>{isAr ? 'الدخون… عبقٌ من أصالة المكان.' : 'Dukhoon… the essence of heritage.'}</h1><p>{isAr ? 'قريباً نكشف عن عالم الدخون من وضايا؛ نفحات تعبّر عن كرم الضيافة ودفء المجالس وذاكرة المكان.' : 'Discover the world of Wadhaya Dukhoon soon — a collection inspired by warm gatherings, generous hospitality and the memory of place.'}</p><span className="dukhoon-coming">{isAr ? 'قريباً' : 'Coming soon'}</span><button className="button-outline" onClick={() => go('shop')}>{isAr ? 'استكشف العطور' : 'Explore fragrances'}<ArrowLeft size={17}/></button></div>
+        <div className="page-intro"><p className="small-overline">WADHAYA · TRADITIONAL INCENSE</p><h1>{isAr ? 'مجموعة الدخون' : 'The Dukhoon Collection'}</h1><p>{isAr ? 'اختَر عبقك المفضل من دخون وضايا.' : 'Discover your favourite traditional incense from Wadhaya.'}</p></div>
+        <div className="product-grid">{catalog.filter(product => product.category === 'dukhoon').map((product, index) => <ProductCard product={product} index={index} key={product.id}/>)}</div>
       </main>}
 
       {page.name === 'product' && <main className="inner-page section-pad">
