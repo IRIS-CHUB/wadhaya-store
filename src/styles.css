@@ -117,3 +117,20 @@
 .footer-social a{display:flex;align-items:center;gap:9px}
 .footer-social .social-logo{width:17px;height:17px;flex:0 0 17px}
 .footer-social a span{flex:1}
+
+
+/* Independent Dukhoon collection page */
+.dukhoon-page{min-height:650px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:9%;padding-top:90px;padding-bottom:90px}
+.dukhoon-visual{min-height:430px;position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse at center,rgba(207,160,76,.19),rgba(36,15,20,.5) 42%,#1a0c0f 72%)}
+.dukhoon-visual:before,.dukhoon-visual:after{content:"";position:absolute;width:230px;height:230px;border:1px solid rgba(207,160,76,.28);border-radius:50%;transform:rotate(-28deg) scaleX(.62)}
+.dukhoon-visual:after{width:310px;height:310px;transform:rotate(35deg) scaleX(.62);border-color:rgba(207,160,76,.15)}
+.dukhoon-orbit{position:absolute;border:1px solid rgba(207,160,76,.13);border-radius:50%;width:370px;height:370px;transform:scaleX(.72) rotate(52deg)}
+.orbit-two{width:430px;height:430px;transform:scaleX(.72) rotate(-52deg)}
+.dukhoon-emblem{font-family:'IBM Plex Sans Arabic',serif;font-size:190px;font-weight:500;color:#e3c27e;text-shadow:0 10px 50px rgba(207,160,76,.18);line-height:1}
+.dukhoon-caption{position:absolute;bottom:28px;font:9px 'DM Sans',sans-serif;letter-spacing:.28em;color:#bda879}
+.dukhoon-content{max-width:510px}
+.dukhoon-content h1{font-size:clamp(38px,4.5vw,58px);font-weight:500;line-height:1.5;margin:0 0 18px}
+.dukhoon-content>p:not(.small-overline){font-size:13px;line-height:2.3;color:#b9b1a4;margin:0 0 27px}
+.dukhoon-coming{display:inline-flex;border:1px solid rgba(207,160,76,.42);padding:8px 17px;color:var(--gold-light);font-size:11px;margin-bottom:28px}
+.dukhoon-content .button-outline{display:flex;width:max-content}
+@media(max-width:760px){.dukhoon-page{grid-template-columns:1fr;gap:32px;padding-top:45px;padding-bottom:65px}.dukhoon-visual{min-height:300px}.dukhoon-emblem{font-size:145px}.dukhoon-content h1{font-size:37px}}

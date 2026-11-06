@@ -8,7 +8,7 @@ import products from './data/products.json'
 const copy = {
   ar: {
     announcement: 'تجربة عطرية تُصنع لتبقى في الذاكرة',
-    navHome: 'الرئيسية', navShop: 'العطور', navStory: 'حكاية وضايا', navContact: 'تواصل معنا',
+    navHome: 'الرئيسية', navShop: 'العطور', navDukhoon: 'الدخون', navStory: 'حكاية وضايا', navContact: 'تواصل معنا',
     eyebrow: 'فن العطر العربي المعاصر', heroTitle: 'ليس مجرد عطر،\\nبل أثرٌ يبقى.', heroText: 'تكوينات عطرية تستلهم روح الصحراء العربية، وتعيد صياغة الفخامة بلمسة عصرية لا تشبه سواها.',
     explore: 'اكتشف المجموعة', ourStory: 'حكاية وضايا', scroll: 'اكتشف عالمنا',
     craftLabel: 'صُنعت بحسّ مختلف', craftTitle: 'الفخامة في التفاصيل.', craftText: 'من أول نفحة إلى آخر أثر، نؤمن أن العطر لغة صامتة تحكي قصتك دون كلمات. مكونات مختارة، وتوازن مدروس، وحضور لا يحتاج إلى إعلان.',
@@ -27,7 +27,7 @@ const copy = {
   },
   en: {
     announcement: 'A fragrance experience made to be remembered',
-    navHome: 'Home', navShop: 'Fragrances', navStory: 'Our story', navContact: 'Contact',
+    navHome: 'Home', navShop: 'Fragrances', navDukhoon: 'Dukhoon', navStory: 'Our story', navContact: 'Contact',
     eyebrow: 'The art of modern Arabian perfumery', heroTitle: 'More than a fragrance.\\nAn enduring impression.', heroText: 'Compositions inspired by the spirit of the Arabian desert, redefining luxury with a contemporary signature.',
     explore: 'Explore the collection', ourStory: 'The Wadhaya story', scroll: 'Discover our world',
     craftLabel: 'Crafted with intention', craftTitle: 'Luxury lives in the details.', craftText: 'From the first note to the final trail, we believe fragrance is a silent language that tells your story. Considered ingredients, thoughtful balance and a presence that needs no announcement.',
@@ -149,6 +149,7 @@ function App() {
         <nav className={`main-nav ${mobileMenu ? 'open' : ''}`}>
           <button onClick={() => go('home')}>{t.navHome}</button>
           <button onClick={() => go('shop')}>{t.navShop}</button>
+          <button onClick={() => go('dukhoon')}>{t.navDukhoon}</button>
           <button onClick={() => go('story')}>{t.navStory}</button>
           <button onClick={() => go('contact')}>{t.navContact}</button>
         </nav>
@@ -218,6 +219,11 @@ function App() {
         <div className="product-grid shop-grid">{catalog.map((product, i) => <ProductCard product={product} index={i} key={product.id}/>)}</div>
       </main>}
 
+      {page.name === 'dukhoon' && <main className="inner-page section-pad dukhoon-page">
+        <div className="dukhoon-visual" aria-hidden="true"><span className="dukhoon-orbit orbit-one"/><span className="dukhoon-orbit orbit-two"/><span className="dukhoon-emblem">و</span><span className="dukhoon-caption">WADHAYA · HERITAGE</span></div>
+        <div className="dukhoon-content"><p className="small-overline">WADHAYA · TRADITIONAL INCENSE</p><h1>{isAr ? 'الدخون… عبقٌ من أصالة المكان.' : 'Dukhoon… the essence of heritage.'}</h1><p>{isAr ? 'قريباً نكشف عن عالم الدخون من وضايا؛ نفحات تعبّر عن كرم الضيافة ودفء المجالس وذاكرة المكان.' : 'Discover the world of Wadhaya Dukhoon soon — a collection inspired by warm gatherings, generous hospitality and the memory of place.'}</p><span className="dukhoon-coming">{isAr ? 'قريباً' : 'Coming soon'}</span><button className="button-outline" onClick={() => go('shop')}>{isAr ? 'استكشف العطور' : 'Explore fragrances'}<ArrowLeft size={17}/></button></div>
+      </main>}
+
       {page.name === 'product' && <main className="inner-page section-pad">
         {selectedProduct ? <><button className="back-link" onClick={() => go('shop')}><ArrowRight size={16}/>{t.back}</button><div className="product-detail">
           <div className="detail-image"><img src={selectedProduct.image} alt={selectedProduct.name[lang]}/><span className="detail-stamp">W.</span></div>
@@ -230,7 +236,7 @@ function App() {
       {page.name === 'contact' && <main className="inner-page section-pad contact-page"><p className="small-overline">{t.navContact}</p><h1>{isAr ? 'يسعدنا تواصلك.' : 'We would love to hear from you.'}</h1><p>{isAr ? 'للاستفسارات حول العطور أو الطلبات، تواصل معنا عبر واتساب.' : 'For fragrance and order enquiries, reach us on WhatsApp.'}</p><a className="button-gold link-button" href="https://wa.me/971508770882" target="_blank" rel="noreferrer">{isAr ? 'تواصل عبر واتساب' : 'Chat on WhatsApp'}<ArrowLeft size={17}/></a><p className="contact-note">{isAr ? 'يرجى استبدال رقم واتساب التجريبي برقم متجرك قبل الإطلاق.' : 'Please replace the placeholder WhatsApp number with your store number before launch.'}</p></main>}
 
       <footer className="site-footer" id="contact">
-        <div className="footer-main"><div className="footer-brand"><button className="brand footer-logo" onClick={() => go('home')} aria-label="Wadhaya home"><img className="brand-emblem" src="/WD.png" alt="" /><span className="brand-wordmark"><span className="brand-ar">وَضَايَا</span><span className="brand-en">W A D H A Y A</span></span></button><p>{t.footerLine}</p></div><div className="footer-links"><h4>{t.quickLinks}</h4><button onClick={() => go('home')}>{t.navHome}</button><button onClick={() => go('shop')}>{t.navShop}</button><button onClick={() => go('story')}>{t.navStory}</button><button onClick={() => go('contact')}>{t.navContact}</button></div><div className="footer-social"><h4>{t.follow}</h4><a href="https://www.instagram.com/wadhaya.perfume/" target="_blank" rel="noopener noreferrer" aria-label="Wadhaya Perfume on Instagram"><svg className="social-logo" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>Instagram</span><ArrowDownLeft size={14}/></a><a href="https://www.tiktok.com/@wadhaya47" target="_blank" rel="noopener noreferrer" aria-label="Wadhaya Perfume on TikTok"><svg className="social-logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.2a4.2 4.2 0 1 1-3.5-4.14v3.1a1.25 1.25 0 1 0 .5 1V3h3c.4 2.5 1.8 4 4 4.4v3.1A8 8 0 0 1 14 8.7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg><span>TikTok</span><ArrowDownLeft size={14}/></a><a href="https://wa.me/971508770882" target="_blank" rel="noopener noreferrer" aria-label="Wadhaya on WhatsApp"><svg className="social-logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/><path d="M9 8.5c.5 2.5 2 4 4.5 5l1.5-1 2 1c-.4 2-2 2.5-3.5 2-4-1-6-3.5-6.5-6.5-.1-1 1-2 2-1.5Z" fill="currentColor"/></svg><span>WhatsApp</span><ArrowDownLeft size={14}/></a></div></div>
+        <div className="footer-main"><div className="footer-brand"><button className="brand footer-logo" onClick={() => go('home')} aria-label="Wadhaya home"><img className="brand-emblem" src="/WD.png" alt="" /><span className="brand-wordmark"><span className="brand-ar">وَضَايَا</span><span className="brand-en">W A D H A Y A</span></span></button><p>{t.footerLine}</p></div><div className="footer-links"><h4>{t.quickLinks}</h4><button onClick={() => go('home')}>{t.navHome}</button><button onClick={() => go('shop')}>{t.navShop}</button><button onClick={() => go('dukhoon')}>{t.navDukhoon}</button><button onClick={() => go('story')}>{t.navStory}</button><button onClick={() => go('contact')}>{t.navContact}</button></div><div className="footer-social"><h4>{t.follow}</h4><a href="https://www.instagram.com/wadhaya.perfume/" target="_blank" rel="noopener noreferrer" aria-label="Wadhaya Perfume on Instagram"><svg className="social-logo" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>Instagram</span><ArrowDownLeft size={14}/></a><a href="https://www.tiktok.com/@wadhaya47" target="_blank" rel="noopener noreferrer" aria-label="Wadhaya Perfume on TikTok"><svg className="social-logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.2a4.2 4.2 0 1 1-3.5-4.14v3.1a1.25 1.25 0 1 0 .5 1V3h3c.4 2.5 1.8 4 4 4.4v3.1A8 8 0 0 1 14 8.7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg><span>TikTok</span><ArrowDownLeft size={14}/></a><a href="https://wa.me/971508770882" target="_blank" rel="noopener noreferrer" aria-label="Wadhaya on WhatsApp"><svg className="social-logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/><path d="M9 8.5c.5 2.5 2 4 4.5 5l1.5-1 2 1c-.4 2-2 2.5-3.5 2-4-1-6-3.5-6.5-6.5-.1-1 1-2 2-1.5Z" fill="currentColor"/></svg><span>WhatsApp</span><ArrowDownLeft size={14}/></a></div></div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} Wadhaya. {t.rights}</span><span>MADE WITH INTENTION · UAE</span></div>
       </footer>
 
