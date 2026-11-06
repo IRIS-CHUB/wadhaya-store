@@ -1,103 +1,50 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { KeyRound, ShieldCheck, LogOut, LockKeyhole } from 'lucide-react'
+import { KeyRound, LogOut, LockKeyhole, Plus, Pencil, Trash2, Save, X, Package, RefreshCw } from 'lucide-react'
 import './styles.css'
 import './admin.css'
-
+const blankProduct = () => ({ id:'', name:{ar:'',en:''}, type:{ar:'عطر فاخر',en:'Luxury Perfume'}, oldPrice:'', price:'', size:'50 ml', note:{ar:'',en:''}, notes:{top:[],middle:[],base:[]}, image:'', tag:{ar:'جديد',en:'New'}, description:{ar:'',en:''} })
 function AdminApp() {
-  const [mode, setMode] = useState('loading')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [setupToken, setSetupToken] = useState('')
-  const [message, setMessage] = useState('')
-  const [busy, setBusy] = useState(false)
-
-  async function checkSession() {
-    try {
-      const response = await fetch('/api/auth/me', { credentials: 'same-origin' })
-      if (response.ok) {
-        const data = await response.json()
-        setEmail(data.admin.email)
-        setMode('dashboard')
-      } else {
-        setMode('login')
-      }
-    } catch {
-      setMessage('تعذر الاتصال بالخادم. تحقق من إعدادات Cloudflare.')
-      setMode('login')
-    }
-  }
-
-  useEffect(() => { checkSession() }, [])
-
-  async function submit(event) {
-    event.preventDefault()
-    setBusy(true)
-    setMessage('')
-    const endpoint = mode === 'setup' ? '/api/auth/setup' : '/api/auth/login'
-    const payload = mode === 'setup' ? { email, password, setupToken } : { email, password }
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',
-        body: JSON.stringify(payload)
-      })
-      const data = await response.json()
-      if (!response.ok) throw new Error(data.error || 'تعذر تسجيل الدخول.')
-      setPassword('')
-      setSetupToken('')
-      await checkSession()
-    } catch (error) {
-      setMessage(error.message || 'حدث خطأ غير متوقع.')
-    } finally {
-      setBusy(false)
-    }
-  }
-
-  async function logout() {
-    await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' })
-    setMode('login')
-    setPassword('')
-    setMessage('تم تسجيل الخروج بأمان.')
-  }
-
-  if (mode === 'loading') return <main className="admin-shell"><div className="admin-card">جارٍ التحقق من الجلسة...</div></main>
-
-  return (
-    <main className="admin-shell" dir="rtl">
-      <div className="admin-brand"><span className="admin-mark">و</span><span>وَضَايَا<small>WADHAYA ADMIN</small></span></div>
-      {mode === 'dashboard' ? (
-        <section className="admin-card">
-          <ShieldCheck size={34} />
-          <p className="admin-kicker">لوحة الإدارة</p>
-          <h1>مرحباً بك في وضايا</h1>
-          <p className="admin-muted">تم التحقق من هويتك بنجاح.</p>
-          <div className="admin-account">{email}</div>
-          <p className="admin-muted">تم تجهيز جلسة المدير. ستُضاف أدوات إدارة المنتجات في المرحلة التالية.</p>
-          <button className="admin-submit" onClick={logout}><LogOut size={16} /> تسجيل الخروج</button>
-        </section>
-      ) : (
-        <section className="admin-card">
-          <LockKeyhole size={34} />
-          <p className="admin-kicker">منطقة محمية</p>
-          <h1>{mode === 'setup' ? 'إعداد حساب المدير' : 'تسجيل دخول المدير'}</h1>
-          <p className="admin-muted">هذه الصفحة مخصصة لإدارة متجر وضايا فقط.</p>
-          <form onSubmit={submit}>
-            <label>البريد الإلكتروني<input type="email" autoComplete="username" required value={email} onChange={e => setEmail(e.target.value)} /></label>
-            <label>كلمة المرور<input type="password" autoComplete={mode === 'setup' ? 'new-password' : 'current-password'} minLength={mode === 'setup' ? 12 : 1} required value={password} onChange={e => setPassword(e.target.value)} /></label>
-            {mode === 'setup' && <label>رمز الإعداد لمرة واحدة<input type="password" required value={setupToken} onChange={e => setSetupToken(e.target.value)} /></label>}
-            <button className="admin-submit" disabled={busy}>{busy ? 'يرجى الانتظار...' : mode === 'setup' ? 'إنشاء حساب المدير' : 'دخول آمن'} <KeyRound size={16} /></button>
-          </form>
-          {message && <p className="admin-message" role="status">{message}</p>}
-          {mode === 'login' && <button className="admin-switch" onClick={() => { setMode('setup'); setMessage('يُستخدم هذا الخيار مرة واحدة فقط لإنشاء أول حساب مدير.') }}>إعداد أول حساب مدير</button>}
-          {mode === 'setup' && <button className="admin-switch" onClick={() => { setMode('login'); setMessage('') }}>العودة لتسجيل الدخول</button>}
-        </section>
-      )}
-      <a className="admin-back" href="/">العودة إلى المتجر</a>
-      <p className="admin-foot">WADHAYA · SECURE ADMIN ACCESS</p>
-    </main>
-  )
+ const [mode,setMode]=useState('loading'),[email,setEmail]=useState(''),[password,setPassword]=useState(''),[setupToken,setSetupToken]=useState(''),[message,setMessage]=useState(''),[busy,setBusy]=useState(false),[products,setProducts]=useState([]),[editing,setEditing]=useState(null),[draft,setDraft]=useState(blankProduct()),[search,setSearch]=useState('')
+ async function loadProducts(){const r=await fetch('/api/admin/products',{credentials:'same-origin'}),d=await r.json();if(!r.ok)throw Error(d.error||'تعذر تحميل المنتجات');setProducts(d.products||[])}
+ async function checkSession(){try{const r=await fetch('/api/auth/me',{credentials:'same-origin'});if(r.ok){const d=await r.json();setEmail(d.admin.email);setMode('dashboard');await loadProducts()}else setMode('login')}catch{setMessage('تعذر الاتصال بالخادم. تحقق من إعدادات Cloudflare.');setMode('login')}}
+ useEffect(()=>{checkSession()},[])
+ async function submit(e){e.preventDefault();setBusy(true);setMessage('');const endpoint=mode==='setup'?'/api/auth/setup':'/api/auth/login';try{const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify(mode==='setup'?{email,password,setupToken}:{email,password})}),d=await r.json();if(!r.ok)throw Error(d.error||'تعذر تسجيل الدخول');setPassword('');setSetupToken('');await checkSession()}catch(e){setMessage(e.message||'حدث خطأ غير متوقع')}finally{setBusy(false)}}
+ async function logout(){await fetch('/api/auth/logout',{method:'POST',credentials:'same-origin'});setMode('login');setPassword('');setProducts([]);setMessage('تم تسجيل الخروج بأمان.')}
+ function startNew(){setEditing('new');setDraft(blankProduct());setMessage('')}
+ function startEdit(p){setEditing(p.id);setDraft(JSON.parse(JSON.stringify(p)));setMessage('')}
+ function update(f,v){setDraft(p=>({...p,[f]:v}))}
+ function updateLang(f,l,v){setDraft(p=>({...p,[f]:{...(p[f]||{}),[l]:v}}))}
+ async function persist(next){setBusy(true);setMessage('');try{const r=await fetch('/api/admin/products',{method:'PUT',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({products:next})}),d=await r.json();if(!r.ok)throw Error(d.error||'تعذر حفظ التغييرات');setProducts(d.products);setMessage('تم حفظ المنتجات بنجاح.');return true}catch(e){setMessage(e.message||'تعذر حفظ التغييرات');return false}finally{setBusy(false)}}
+ async function saveProduct(e){e.preventDefault();const id=String(draft.id||'').trim().toLowerCase().replace(/[^a-z0-9-]/g,'-');if(!id||!draft.name.ar.trim()||!draft.name.en.trim()||draft.price===''||Number(draft.price)<0||!draft.image.trim()){setMessage('أكمل المعرّف والاسم والسعر ورابط الصورة قبل الحفظ.');return}const p={...draft,id,price:Number(draft.price),oldPrice:draft.oldPrice===''?null:Number(draft.oldPrice)};const next=editing==='new'?[...products,p]:products.map(x=>x.id===editing?p:x);if(await persist(next)){setEditing(null);setDraft(blankProduct())}}
+ async function removeProduct(id){if(window.confirm('هل تريد حذف هذا المنتج نهائياً من المتجر؟'))await persist(products.filter(p=>p.id!==id))}
+ const filtered=useMemo(()=>products.filter(p=>(p.name?.ar+' '+p.name?.en+' '+p.id).toLowerCase().includes(search.toLowerCase())),[products,search])
+ if(mode==='loading')return <main className="admin-shell"><div className="admin-card">جارٍ التحقق من الجلسة...</div></main>
+ return <main className="admin-shell admin-dashboard" dir="rtl">
+  <header className="admin-topbar"><div className="admin-brand"><span className="admin-mark">و</span><span>وَضَايَا<small>WADHAYA ADMIN</small></span></div>{mode==='dashboard'&&<div className="admin-user"><span>{email}</span><button onClick={logout}><LogOut size={16}/> خروج</button></div>}</header>
+  {mode==='dashboard'?<div className="admin-layout">
+   <aside className="admin-sidebar"><p className="admin-kicker">مساحة العمل</p><button className="active"><Package size={17}/> المنتجات</button><div className="admin-sidebar-note">إدارة الكتالوج والأسعار والصور. الطلبات تظل عبر واتساب كما هي.</div><a href="/" className="admin-back">عرض المتجر ↗</a></aside>
+   <section className="admin-content"><div className="admin-heading"><div><p className="admin-kicker">إدارة المتجر</p><h1>المنتجات والعطور</h1><p className="admin-muted">أضف العطور أو حدّث تفاصيلها وأسعارها وصورها.</p></div><button className="admin-primary" onClick={startNew}><Plus size={17}/> إضافة منتج</button></div>
+    <div className="admin-stats"><div><span>إجمالي المنتجات</span><strong>{products.length}</strong></div><div><span>العملة</span><strong>د.إ</strong></div><div><span>طريقة الطلب</span><strong>واتساب</strong></div></div>
+    {message&&<p className="admin-message admin-notice" role="status">{message}</p>}
+    {editing!==null?<form className="admin-editor" onSubmit={saveProduct}><div className="admin-editor-head"><h2>{editing==='new'?'إضافة عطر جديد':'تعديل بيانات العطر'}</h2><button type="button" className="admin-icon-button" onClick={()=>setEditing(null)}><X size={18}/></button></div>
+     <div className="admin-form-grid">
+      <label>معرّف المنتج<input required value={draft.id} onChange={e=>update('id',e.target.value)} placeholder="oud-special"/></label>
+      <label>السعر (د.إ)<input required type="number" min="0" step="0.01" value={draft.price} onChange={e=>update('price',e.target.value)}/></label>
+      <label>السعر السابق<input type="number" min="0" value={draft.oldPrice??''} onChange={e=>update('oldPrice',e.target.value)}/></label><label>الحجم<input value={draft.size||''} onChange={e=>update('size',e.target.value)}/></label>
+      <label>الاسم بالعربية<input required value={draft.name?.ar||''} onChange={e=>updateLang('name','ar',e.target.value)}/></label><label>الاسم بالإنجليزية<input required value={draft.name?.en||''} onChange={e=>updateLang('name','en',e.target.value)}/></label>
+      <label>نوع العطر بالعربية<input value={draft.type?.ar||''} onChange={e=>updateLang('type','ar',e.target.value)}/></label><label>نوع العطر بالإنجليزية<input value={draft.type?.en||''} onChange={e=>updateLang('type','en',e.target.value)}/></label>
+      <label className="wide">رابط الصورة أو مسارها<input required value={draft.image||''} onChange={e=>update('image',e.target.value)} placeholder="/images/perfume.jpg"/></label>
+      <label>شارة المنتج بالعربية<input value={draft.tag?.ar||''} onChange={e=>updateLang('tag','ar',e.target.value)}/></label><label>شارة المنتج بالإنجليزية<input value={draft.tag?.en||''} onChange={e=>updateLang('tag','en',e.target.value)}/></label>
+      <label className="wide">وصف بالعربية<textarea rows="2" value={draft.description?.ar||''} onChange={e=>updateLang('description','ar',e.target.value)}/></label><label className="wide">Description (English)<textarea rows="2" value={draft.description?.en||''} onChange={e=>updateLang('description','en',e.target.value)}/></label>
+      <label className="wide">ملاحظات العطر بالعربية<input value={draft.note?.ar||''} onChange={e=>updateLang('note','ar',e.target.value)}/></label><label className="wide">Fragrance notes (English)<input value={draft.note?.en||''} onChange={e=>updateLang('note','en',e.target.value)}/></label>
+     </div><div className="admin-editor-actions"><button className="admin-primary" disabled={busy}><Save size={16}/>{busy?'جارٍ الحفظ...':'حفظ المنتج'}</button><button type="button" className="admin-cancel" onClick={()=>setEditing(null)}>إلغاء</button></div>
+    </form>:<><div className="admin-toolbar"><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="ابحث عن عطر..."/><button className="admin-refresh" onClick={()=>loadProducts().catch(e=>setMessage(e.message))}><RefreshCw size={15}/> تحديث</button></div><div className="admin-product-list">
+     {filtered.map(p=><article className="admin-product-row" key={p.id}><img src={p.image} alt={p.name?.ar||''}/><div className="admin-product-info"><strong>{p.name?.ar} <small>· {p.name?.en}</small></strong><span>{p.type?.ar} · {p.size||'—'}</span><b>{Number(p.price).toLocaleString('ar-AE')} د.إ {p.oldPrice?<del>{p.oldPrice} د.إ</del>:null}</b></div><div className="admin-product-actions"><button onClick={()=>startEdit(p)} aria-label="تعديل"><Pencil size={16}/></button><button className="danger" onClick={()=>removeProduct(p.id)} aria-label="حذف"><Trash2 size={16}/></button></div></article>)}
+     {!filtered.length&&<p className="admin-empty">لا توجد منتجات مطابقة.</p>}</div></>}
+   </section>
+  </div>:<section className="admin-card admin-auth-card"><LockKeyhole size={34}/><p className="admin-kicker">منطقة محمية</p><h1>{mode==='setup'?'إعداد حساب المدير':'تسجيل دخول المدير'}</h1><p className="admin-muted">هذه الصفحة مخصصة لإدارة متجر وضايا فقط.</p><form onSubmit={submit}><label>البريد الإلكتروني<input type="email" autoComplete="username" required value={email} onChange={e=>setEmail(e.target.value)}/></label><label>كلمة المرور<input type="password" autoComplete={mode==='setup'?'new-password':'current-password'} minLength={mode==='setup'?12:1} required value={password} onChange={e=>setPassword(e.target.value)}/></label>{mode==='setup'&&<label>رمز الإعداد لمرة واحدة<input type="password" required value={setupToken} onChange={e=>setSetupToken(e.target.value)}/></label>}<button className="admin-submit" disabled={busy}>{busy?'يرجى الانتظار...':mode==='setup'?'إنشاء حساب المدير':'دخول آمن'} <KeyRound size={16}/></button></form>{message&&<p className="admin-message" role="status">{message}</p>}{mode==='login'&&<button className="admin-switch" onClick={()=>{setMode('setup');setMessage('يُستخدم هذا الخيار مرة واحدة فقط لإنشاء أول حساب مدير.')}}>إعداد أول حساب مدير</button>}{mode==='setup'&&<button className="admin-switch" onClick={()=>{setMode('login');setMessage('')}}>العودة لتسجيل الدخول</button>}</section>}
+  <p className="admin-foot">WADHAYA · SECURE ADMIN ACCESS</p>
+ </main>
 }
-
 createRoot(document.getElementById('admin-root')).render(<AdminApp />)
