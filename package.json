@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "deploy": "npm run build && npx wrangler@4.153.0 deploy",
     "db:migrate:local": "npx wrangler@4.153.0 d1 migrations apply wadhaya-store-db --local",
-    "db:migrate:remote": "npx wrangler@4.153.0 d1 migrations apply wadhaya-store-db --remote"
+    "db:migrate:remote": "npx wrangler@4.153.0 d1 migrations apply wadhaya-store-db --remote",
+    "validate:catalog": "node scripts/validate-catalog.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
