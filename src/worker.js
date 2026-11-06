@@ -197,9 +197,18 @@ export default {
 
     if (url.pathname === "/api/products" && request.method === "GET") {
       try {
-        const rows = await env.DB.prepare("SELECT product_json FROM products ORDER BY sort_order, id").all();
+        let rows = await env.DB.prepare("SELECT product_json FROM products ORDER BY sort_order, id").all();
+        if (!rows.results.length) {
+          await env.DB.batch(defaultProducts.map((product, index) =>
+            env.DB.prepare("INSERT OR IGNORE INTO products (id, product_json, sort_order, updated_at) VALUES (?, ?, ?, ?)")
+              .bind(product.id, JSON.stringify(product), index, Math.floor(Date.now() / 1000))
+          ));
+          rows = await env.DB.prepare("SELECT product_json FROM products ORDER BY sort_order, id").all();
+        }
         return json({ products: rows.results.map((row) => JSON.parse(row.product_json)) });
-      } catch { return json({ products: defaultProducts }); }
+      } catch {
+        return json({ products: defaultProducts, source: "bundled-fallback" });
+      }
     }
     if (url.pathname.startsWith("/api/admin/")) {
       const admin = await getAdmin(request, env, url);
