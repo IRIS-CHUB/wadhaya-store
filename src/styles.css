@@ -179,3 +179,21 @@ html{scroll-behavior:smooth}
 @media(min-width:1200px){.hero{height:min(790px,calc(100svh - 100px))}.hero-content{inset-inline-start:13%;width:min(540px,43%)}.section-pad{padding-inline:12%}.story-banner{padding-inline:12%}}
 @media(max-width:680px){.site-header{position:sticky;top:0}.hero{min-height:630px}.hero-image{background-position:61% center}.hero-shade{background:linear-gradient(0deg,rgba(12,4,7,.94),rgba(12,4,7,.52) 58%,rgba(12,4,7,.15)),linear-gradient(90deg,rgba(12,4,7,.25),transparent)}.hero-content{bottom:88px}.intro-section:after{display:none}.story-banner-image{background-position:60% center}}
 @media(prefers-reduced-motion:reduce){.product-card,.button-gold,.product-image img{transition:none!important}}
+
+/* Premium bilingual typography */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+:root{--font-ar:'Noto Naskh Arabic','IBM Plex Sans Arabic',serif;--font-en:'Cormorant Garamond','DM Sans',serif;--font-ui:'DM Sans','IBM Plex Sans Arabic',sans-serif}
+[dir="rtl"]{font-family:var(--font-ar)}
+[dir="ltr"]{font-family:var(--font-ui)}
+[dir="rtl"] .brand-ar,[dir="rtl"] .hero h1,[dir="rtl"] .intro-grid h2,[dir="rtl"] .section-heading h2,[dir="rtl"] .story-banner h2,[dir="rtl"] .page-intro h1,[dir="rtl"] .story-page h1,[dir="rtl"] .contact-page h1,[dir="rtl"] .quote-section p,[dir="rtl"] .product-name,[dir="rtl"] .detail-content h1{font-family:var(--font-ar);font-weight:600;letter-spacing:0;line-height:1.65}
+[dir="ltr"] .brand-en,[dir="ltr"] .hero h1,[dir="ltr"] .intro-grid h2,[dir="ltr"] .section-heading h2,[dir="ltr"] .story-banner h2,[dir="ltr"] .page-intro h1,[dir="ltr"] .story-page h1,[dir="ltr"] .contact-page h1,[dir="ltr"] .quote-section p,[dir="ltr"] .product-name,[dir="ltr"] .detail-content h1{font-family:var(--font-en);font-weight:500;letter-spacing:-.025em;line-height:1.12}
+[dir="rtl"] .hero h1{font-size:clamp(43px,5.6vw,76px)}
+[dir="ltr"] .hero h1{font-size:clamp(54px,6.4vw,88px)}
+[dir="rtl"] .hero-description,[dir="rtl"] .intro-copy>p,[dir="rtl"] .story-banner-content>p:not(.small-overline),[dir="rtl"] .detail-description{font-family:var(--font-ar);font-size:15px;line-height:2.15}
+[dir="ltr"] .hero-description,[dir="ltr"] .intro-copy>p,[dir="ltr"] .story-banner-content>p:not(.small-overline),[dir="ltr"] .detail-description{font-family:var(--font-ui);font-size:13px;line-height:2.05;letter-spacing:.01em}
+[dir="rtl"] .main-nav button,[dir="rtl"] .button-gold,[dir="rtl"] .button-text,[dir="rtl"] .button-outline,[dir="rtl"] .underlined-link,[dir="rtl"] .add-button{font-family:var(--font-ar);font-size:13px}
+[dir="ltr"] .main-nav button,[dir="ltr"] .button-gold,[dir="ltr"] .button-text,[dir="ltr"] .button-outline,[dir="ltr"] .underlined-link,[dir="ltr"] .add-button{font-family:var(--font-ui);letter-spacing:.035em}
+.announcement{font-family:var(--font-ar);font-size:12px;letter-spacing:0}
+[dir="ltr"] .announcement{font-family:var(--font-ui);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.hero h1,.intro-grid h2,.section-heading h2,.story-banner h2,.page-intro h1,.story-page h1,.contact-page h1{text-wrap:balance}
+@media(max-width:680px){[dir="rtl"] .hero h1{font-size:clamp(39px,10vw,54px)}[dir="ltr"] .hero h1{font-size:clamp(48px,12vw,66px)}[dir="rtl"] .hero-description{font-size:14px;max-width:94%}}
