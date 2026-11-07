@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1000" fill="none">
+<defs>
+ <linearGradient id="sky" x1="900" y1="0" x2="900" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#211015"/><stop offset=".46" stop-color="#633a32"/><stop offset="1" stop-color="#17090d"/></linearGradient>
+ <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(690 0 0 480 1240 410)" gradientUnits="userSpaceOnUse"><stop stop-color="#d7a866" stop-opacity=".65"/><stop offset="1" stop-color="#d7a866" stop-opacity="0"/></radialGradient>
+ <linearGradient id="sand" x1="900" y1="570" x2="900" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#bd8b55"/><stop offset=".42" stop-color="#6d3c32"/><stop offset="1" stop-color="#210d13"/></linearGradient>
+ <linearGradient id="bottle" x1="1240" y1="320" x2="1470" y2="800" gradientUnits="userSpaceOnUse"><stop stop-color="#f1d7a0" stop-opacity=".92"/><stop offset=".2" stop-color="#9d673c" stop-opacity=".84"/><stop offset=".62" stop-color="#4a1d20" stop-opacity=".97"/><stop offset="1" stop-color="#16090e"/></linearGradient>
+ <linearGradient id="gold" x1="1200" y1="0" x2="1480" y2="800" gradientUnits="userSpaceOnUse"><stop stop-color="#f7dfaa"/><stop offset=".5" stop-color="#c18d48"/><stop offset="1" stop-color="#f0d29a"/></linearGradient>
+ <linearGradient id="arch" x1="1250" y1="100" x2="1650" y2="850" gradientUnits="userSpaceOnUse"><stop stop-color="#e7bd7a" stop-opacity=".4"/><stop offset="1" stop-color="#6e392b" stop-opacity=".03"/></linearGradient>
+ <filter id="blur"><feGaussianBlur stdDeviation="55"/></filter>
+ <filter id="shadow" x="1000" y="200" width="700" height="800" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="28"/></filter>
+</defs>
+<path fill="url(#sky)" d="M0 0h1800v1000H0z"/><path fill="url(#glow)" d="M0 0h1800v1000H0z"/>
+<circle cx="1350" cy="370" r="260" fill="#e3b978" opacity=".12" filter="url(#blur)"/>
+<!-- distant dunes -->
+<path d="M0 680c240-120 390-90 610-30 220 61 354 13 550-64 220-87 412-57 640 20v394H0V680Z" fill="#5d342f" opacity=".72"/>
+<path d="M0 760c260-125 460-84 680-20 230 67 400 45 620-37 190-71 360-55 500 6v291H0V760Z" fill="url(#sand)"/>
+<path d="M0 850c250-94 480-56 710-2 245 58 490 21 680-36 155-47 290-42 410-2v190H0V850Z" fill="#2a1118"/>
+<!-- ornamental arch -->
+<path d="M1080 830V415c0-240 138-378 350-378s350 138 350 378v415" stroke="url(#arch)" stroke-width="26"/>
+<path d="M1120 830V420c0-213 120-338 310-338s310 125 310 338v410" stroke="#e4b978" stroke-opacity=".12" stroke-width="2"/>
+<path d="M1180 830V424c0-172 95-270 250-270s250 98 250 270v406" stroke="#e4b978" stroke-opacity=".08" stroke-width="1"/>
+<!-- bottle shadow -->
+<ellipse cx="1360" cy="820" rx="260" ry="48" fill="#080306" opacity=".68" filter="url(#shadow)"/>
+<!-- perfume cap -->
+<path d="M1302 240h122l18 104h-158l18-104Z" fill="#171014" stroke="url(#gold)" stroke-width="3"/>
+<path d="M1314 255h98v70h-98z" fill="#9c7447" fill-opacity=".25"/>
+<path d="M1290 339h146v52h-146z" fill="#d0a25f" stroke="#f0d5a0" stroke-width="2"/>
+<path d="M1270 380c0-19 15-34 34-34h118c19 0 34 15 34 34v356c0 40-32 72-72 72h-42c-40 0-72-32-72-72V380Z" fill="url(#bottle)" stroke="url(#gold)" stroke-width="3"/>
+<path d="M1290 390c0-13 10-23 23-23h100c13 0 23 10 23 23v335c0 26-21 47-47 47h-52c-26 0-47-21-47-47V390Z" stroke="#f3d9a7" stroke-opacity=".5" stroke-width="2"/>
+<path d="M1302 408v280" stroke="#f8e5bd" stroke-opacity=".28" stroke-width="9" stroke-linecap="round"/>
+<rect x="1302" y="515" width="142" height="126" rx="2" fill="#210d12" fill-opacity=".88" stroke="#d6ad70" stroke-width="2"/>
+<path d="M1320 536h106M1320 619h106" stroke="#d6ad70" stroke-opacity=".5"/>
+<text x="1373" y="575" fill="#f0d9aa" font-family="Georgia,serif" font-size="35" letter-spacing="8" text-anchor="middle">W.</text>
+<text x="1373" y="599" fill="#e3c38e" font-family="Arial,sans-serif" font-size="9" letter-spacing="5" text-anchor="middle">WADHAYA</text>
+<!-- amber glass glints -->
+<path d="M1460 435c35 115 25 250 0 306" stroke="#f3d5a0" stroke-opacity=".22" stroke-width="5" stroke-linecap="round"/>
+<path d="M1180 890c180-55 360-45 550 5" stroke="#e2b978" stroke-opacity=".2" stroke-width="2"/>
+<!-- small stars -->
+<g fill="#f2d7a2" opacity=".55"><circle cx="1010" cy="210" r="2"/><circle cx="1540" cy="165" r="2"/><circle cx="1680" cy="285" r="1.5"/><circle cx="1145" cy="300" r="1.5"/><circle cx="930" cy="420" r="1.3"/></g>
+<path d="M0 0h1800v1000H0z" fill="url(#sky)" opacity=".08"/>
+</svg>
