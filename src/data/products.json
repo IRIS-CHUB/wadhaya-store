@@ -1,102 +1,407 @@
 [
   {
     "id": "sarab",
-    "name": { "ar": "سراب", "en": "Sarab" },
-    "type": { "ar": "عطر فاخر", "en": "Eau de Parfum" },
+    "name": {
+      "ar": "سراب",
+      "en": "Sarab"
+    },
+    "type": {
+      "ar": "عطر فاخر",
+      "en": "Eau de Parfum"
+    },
     "oldPrice": 200,
     "price": 120,
     "size": "50 ml",
-    "note": { "ar": "عنبر دافئ • زعفران • أخشاب ثمينة", "en": "Warm amber • Saffron • Precious woods" },
+    "note": {
+      "ar": "عنبر دافئ • زعفران • أخشاب ثمينة",
+      "en": "Warm amber • Saffron • Precious woods"
+    },
     "notes": {
-      "top": [{"en":"Grapefruit","ar":"جريب فروت"},{"en":"Lavender","ar":"لافندر"},{"en":"Artemisia","ar":"شيح"},{"en":"Cardamom","ar":"هيل"},{"en":"Cinnamon","ar":"قرفة"},{"en":"Cypress","ar":"سرو"},{"en":"Saffron","ar":"زعفران"},{"en":"Bergamot","ar":"برغموت"},{"en":"Apple","ar":"تفاح"},{"en":"Nutmeg","ar":"جوزة الطيب"},{"en":"Styrax","ar":"ستيراكس"}],
-      "middle": [{"en":"Tobacco","ar":"تبغ"},{"en":"Kharismal","ar":"كاريزمال"},{"en":"Cashmeran","ar":"كاشميران"},{"en":"Jasmine","ar":"ياسمين"},{"en":"Muguet","ar":"زنبق الوادي"},{"en":"Geranium","ar":"إبرة الراعي"},{"en":"Agarwood","ar":"عود"},{"en":"Labdanum","ar":"لابدانوم"},{"en":"Cedarwood","ar":"خشب الأرز"},{"en":"Cyprus","ar":"سرو"}],
-      "base": [{"en":"Oud","ar":"عود"},{"en":"Musk","ar":"مسك"},{"en":"Patchouli","ar":"باتشولي"},{"en":"Sandalwood","ar":"خشب الصندل"},{"en":"Leather","ar":"جلد"},{"en":"Gajak","ar":"جاياك"},{"en":"Vanilla","ar":"فانيلا"},{"en":"Tonka","ar":"تونكا"},{"en":"Vetiver","ar":"فيتيفر"},{"en":"Amber","ar":"عنبر"},{"en":"Benzoin/tolu","ar":"بنزوين / تولو"}],
-      "family": {"en":"Oriental - Ambery - Leathery","ar":"شرقي • عنبري • جلدي"}
+      "top": [
+        {
+          "en": "Grapefruit",
+          "ar": "جريب فروت"
+        },
+        {
+          "en": "Lavender",
+          "ar": "لافندر"
+        },
+        {
+          "en": "Artemisia",
+          "ar": "شيح"
+        },
+        {
+          "en": "Cardamom",
+          "ar": "هيل"
+        },
+        {
+          "en": "Cinnamon",
+          "ar": "قرفة"
+        },
+        {
+          "en": "Cypress",
+          "ar": "سرو"
+        },
+        {
+          "en": "Saffron",
+          "ar": "زعفران"
+        },
+        {
+          "en": "Bergamot",
+          "ar": "برغموت"
+        },
+        {
+          "en": "Apple",
+          "ar": "تفاح"
+        },
+        {
+          "en": "Nutmeg",
+          "ar": "جوزة الطيب"
+        },
+        {
+          "en": "Styrax",
+          "ar": "ستيراكس"
+        }
+      ],
+      "middle": [
+        {
+          "en": "Tobacco",
+          "ar": "تبغ"
+        },
+        {
+          "en": "Kharismal",
+          "ar": "كاريزمال"
+        },
+        {
+          "en": "Cashmeran",
+          "ar": "كاشميران"
+        },
+        {
+          "en": "Jasmine",
+          "ar": "ياسمين"
+        },
+        {
+          "en": "Muguet",
+          "ar": "زنبق الوادي"
+        },
+        {
+          "en": "Geranium",
+          "ar": "إبرة الراعي"
+        },
+        {
+          "en": "Agarwood",
+          "ar": "عود"
+        },
+        {
+          "en": "Labdanum",
+          "ar": "لابدانوم"
+        },
+        {
+          "en": "Cedarwood",
+          "ar": "خشب الأرز"
+        },
+        {
+          "en": "Cyprus",
+          "ar": "سرو"
+        }
+      ],
+      "base": [
+        {
+          "en": "Oud",
+          "ar": "عود"
+        },
+        {
+          "en": "Musk",
+          "ar": "مسك"
+        },
+        {
+          "en": "Patchouli",
+          "ar": "باتشولي"
+        },
+        {
+          "en": "Sandalwood",
+          "ar": "خشب الصندل"
+        },
+        {
+          "en": "Leather",
+          "ar": "جلد"
+        },
+        {
+          "en": "Gajak",
+          "ar": "جاياك"
+        },
+        {
+          "en": "Vanilla",
+          "ar": "فانيلا"
+        },
+        {
+          "en": "Tonka",
+          "ar": "تونكا"
+        },
+        {
+          "en": "Vetiver",
+          "ar": "فيتيفر"
+        },
+        {
+          "en": "Amber",
+          "ar": "عنبر"
+        },
+        {
+          "en": "Benzoin/tolu",
+          "ar": "بنزوين / تولو"
+        }
+      ],
+      "family": {
+        "en": "Oriental - Ambery - Leathery",
+        "ar": "شرقي • عنبري • جلدي"
+      }
     },
     "image": "/images/sarab.jpg",
-    "tag": {"ar":"الأكثر تميزاً","en":"Signature"},
-    "description": {"ar":"رحلة حسية بين دفء العنبر وغموض الصحراء عند الغروب. توقيع عطري عميق، أنيق، ولا يُنسى.","en":"A sensory journey through warm amber and the mystery of the desert at dusk. Deep, elegant and unforgettable."}
+    "tag": {
+      "ar": "الأكثر تميزاً",
+      "en": "Signature"
+    },
+    "description": {
+      "ar": "رحلة حسية بين دفء العنبر وغموض الصحراء عند الغروب. توقيع عطري عميق، أنيق، ولا يُنسى.",
+      "en": "A sensory journey through warm amber and the mystery of the desert at dusk. Deep, elegant and unforgettable."
+    }
   },
   {
     "id": "rabdan",
-    "name": {"ar":"ربدان","en":"Rabdan"},
-    "type": {"ar":"عطر منعش فاكهي","en":"Fresh Fruity Perfume"},
+    "name": {
+      "ar": "ربدان",
+      "en": "Rabdan"
+    },
+    "type": {
+      "ar": "عطر منعش فاكهي",
+      "en": "Fresh Fruity Perfume"
+    },
     "oldPrice": 200,
     "price": 100,
     "size": "50 ml",
-    "note": {"ar":"برتقال • برغموت • مسك أبيض • فانيلا","en":"Orange • Bergamot • White musk • Vanilla"},
-    "notes": {
-      "top":[{"en":"Orange","ar":"برتقال"},{"en":"Bergamot","ar":"برغموت"},{"en":"Lemon","ar":"ليمون"}],
-      "middle":[{"en":"Mediterranean Fruits","ar":"فواكه البحر المتوسط"},{"en":"Fruity Notes","ar":"نفحات فاكهية"}],
-      "base":[{"en":"White Musk","ar":"مسك أبيض"},{"en":"Amber","ar":"عنبر"},{"en":"Madagascar Vanilla","ar":"فانيلا مدغشقر"}]
+    "note": {
+      "ar": "برتقال • برغموت • مسك أبيض • فانيلا",
+      "en": "Orange • Bergamot • White musk • Vanilla"
     },
-    "image":"/images/rabdan.jpg",
-    "tag":{"ar":"منعش","en":"Fresh"},
-    "description":{"ar":"افتتاحية حمضية مشرقة تنساب نحو فواكه البحر المتوسط، وتستقر على مسك أبيض وفانيلا مدغشقر الدافئة.","en":"A bright citrus opening flowing into Mediterranean fruits, settling on white musk and warm Madagascar vanilla."}
+    "notes": {
+      "top": [
+        {
+          "en": "Orange",
+          "ar": "برتقال"
+        },
+        {
+          "en": "Bergamot",
+          "ar": "برغموت"
+        },
+        {
+          "en": "Lemon",
+          "ar": "ليمون"
+        }
+      ],
+      "middle": [
+        {
+          "en": "Mediterranean Fruits",
+          "ar": "فواكه البحر المتوسط"
+        },
+        {
+          "en": "Fruity Notes",
+          "ar": "نفحات فاكهية"
+        }
+      ],
+      "base": [
+        {
+          "en": "White Musk",
+          "ar": "مسك أبيض"
+        },
+        {
+          "en": "Amber",
+          "ar": "عنبر"
+        },
+        {
+          "en": "Madagascar Vanilla",
+          "ar": "فانيلا مدغشقر"
+        }
+      ]
+    },
+    "image": "/images/rabdan.jpg",
+    "tag": {
+      "ar": "منعش",
+      "en": "Fresh"
+    },
+    "description": {
+      "ar": "افتتاحية حمضية مشرقة تنساب نحو فواكه البحر المتوسط، وتستقر على مسك أبيض وفانيلا مدغشقر الدافئة.",
+      "en": "A bright citrus opening flowing into Mediterranean fruits, settling on white musk and warm Madagascar vanilla."
+    }
   },
   {
-    "id":"zayed",
-    "name":{"ar":"زايد","en":"Zayed"},
-    "type":{"ar":"عطر فاخر","en":"Luxury Perfume"},
-    "oldPrice":150,
-    "price":90,
-    "size":"50 ml",
-    "note":{"ar":"ليمون كالابري • ورد تركي • فانيلا • مسك أبيض","en":"Calabrian lemon • Turkish rose • Vanilla • White musk"},
-    "notes":{"top":[{"en":"Fresh Calabrian Lemon","ar":"ليمون كالابري المنعش"}],"middle":[{"en":"Turkish Rose","ar":"ورد تركي"},{"en":"Turkish Delight","ar":"راحة الحلقوم التركية"}],"base":[{"en":"Intense Vanilla","ar":"فانيلا مكثفة"},{"en":"White Musk","ar":"مسك أبيض"},{"en":"Cedarwood","ar":"خشب الأرز"}]},
-    "image":"/images/zayed.png",
-    "tag":{"ar":"جديد","en":"New"},
-    "description":{"ar":"انتعاش الليمون الكالابري يلتقي بالورد التركي والحلقوم، ويستقر على فانيلا مكثفة ومسك أبيض وخشب الأرز.","en":"Fresh Calabrian lemon meets Turkish rose and Turkish delight, resting on intense vanilla, white musk and cedarwood."}
+    "id": "zayed",
+    "name": {
+      "ar": "زايد",
+      "en": "Zayed"
+    },
+    "type": {
+      "ar": "عطر فاخر",
+      "en": "Luxury Perfume"
+    },
+    "oldPrice": 150,
+    "price": 90,
+    "size": "50 ml",
+    "note": {
+      "ar": "ليمون كالابري • ورد تركي • فانيلا • مسك أبيض",
+      "en": "Calabrian lemon • Turkish rose • Vanilla • White musk"
+    },
+    "notes": {
+      "top": [
+        {
+          "en": "Fresh Calabrian Lemon",
+          "ar": "ليمون كالابري المنعش"
+        }
+      ],
+      "middle": [
+        {
+          "en": "Turkish Rose",
+          "ar": "ورد تركي"
+        },
+        {
+          "en": "Turkish Delight",
+          "ar": "راحة الحلقوم التركية"
+        }
+      ],
+      "base": [
+        {
+          "en": "Intense Vanilla",
+          "ar": "فانيلا مكثفة"
+        },
+        {
+          "en": "White Musk",
+          "ar": "مسك أبيض"
+        },
+        {
+          "en": "Cedarwood",
+          "ar": "خشب الأرز"
+        }
+      ]
+    },
+    "image": "/images/zayed.png",
+    "tag": {
+      "ar": "جديد",
+      "en": "New"
+    },
+    "description": {
+      "ar": "انتعاش الليمون الكالابري يلتقي بالورد التركي والحلقوم، ويستقر على فانيلا مكثفة ومسك أبيض وخشب الأرز.",
+      "en": "Fresh Calabrian lemon meets Turkish rose and Turkish delight, resting on intense vanilla, white musk and cedarwood."
+    }
   },
   {
-    "id":"dukhoon-wahaj",
-    "category":"dukhoon",
-    "name":{"ar":"دخون وهج","en":"Wahaj Dukhoon"},
-    "type":{"ar":"دخون","en":"Traditional Incense"},
-    "oldPrice":150,
-    "price":90,
-    "size":"—",
-    "note":{"ar":"دخون وضايا","en":"Wadhaya traditional incense"},
-    "image":"/images/dukhoon-wahaj.jpg",
-    "tag":{"ar":"مجموعة الدخون","en":"Dukhoon Collection"},
-    "description":{"ar":"دخون وهج من مجموعة وضايا.","en":"Wahaj from the Wadhaya Dukhoon collection."}
+    "id": "dukhoon-wahaj",
+    "category": "dukhoon",
+    "name": {
+      "ar": "دخون وهج",
+      "en": "Dukhoon Wahaj"
+    },
+    "type": {
+      "ar": "دخون",
+      "en": "Traditional Incense"
+    },
+    "oldPrice": 150,
+    "price": 90,
+    "size": "—",
+    "note": {
+      "ar": "دخون وضايا",
+      "en": "Wadhaya traditional incense"
+    },
+    "image": "/images/dukhoon-wahaj.jpg",
+    "tag": {
+      "ar": "مجموعة الدخون",
+      "en": "Dukhoon Collection"
+    },
+    "description": {
+      "ar": "دخون وهج من مجموعة وضايا، بسعر خاص 90 درهماً بدلاً من 150 درهماً.",
+      "en": "Dukhoon Wahaj from the Wadhaya collection, now AED 90 instead of AED 150."
+    }
   },
   {
-    "id":"dukhoon-diwan",
-    "category":"dukhoon",
-    "name":{"ar":"دخون الديوان","en":"Al Diwan Dukhoon"},
-    "type":{"ar":"دخون","en":"Traditional Incense"},
-    "oldPrice":150,
-    "price":90,
-    "size":"—",
-    "note":{"ar":"دخون وضايا","en":"Wadhaya traditional incense"},
-    "image":"/images/zayed.png",
-    "tag":{"ar":"مجموعة الدخون","en":"Dukhoon Collection"},
-    "description":{"ar":"دخون الديوان من مجموعة وضايا.","en":"Al Diwan from the Wadhaya Dukhoon collection."}
+    "id": "dukhoon-diwan",
+    "category": "dukhoon",
+    "name": {
+      "ar": "دخون الديوان",
+      "en": "Al Diwan Dukhoon"
+    },
+    "type": {
+      "ar": "دخون",
+      "en": "Traditional Incense"
+    },
+    "oldPrice": 150,
+    "price": 90,
+    "size": "—",
+    "note": {
+      "ar": "دخون وضايا",
+      "en": "Wadhaya traditional incense"
+    },
+    "image": "/images/zayed.png",
+    "tag": {
+      "ar": "مجموعة الدخون",
+      "en": "Dukhoon Collection"
+    },
+    "description": {
+      "ar": "دخون الديوان من مجموعة وضايا.",
+      "en": "Al Diwan from the Wadhaya Dukhoon collection."
+    }
   },
   {
-    "id":"dukhoon-dhabi",
-    "category":"dukhoon",
-    "name":{"ar":"دخون الظبي","en":"Al Dhabi Dukhoon"},
-    "type":{"ar":"دخون","en":"Traditional Incense"},
-    "oldPrice":200,
-    "price":110,
-    "size":"—",
-    "note":{"ar":"دخون وضايا","en":"Wadhaya traditional incense"},
-    "image":"/images/zayed.png",
-    "tag":{"ar":"مجموعة الدخون","en":"Dukhoon Collection"},
-    "description":{"ar":"دخون الظبي من مجموعة وضايا.","en":"Al Dhabi from the Wadhaya Dukhoon collection."}
+    "id": "dukhoon-dhabi",
+    "category": "dukhoon",
+    "name": {
+      "ar": "دخون الظبي",
+      "en": "Al Dhabi Dukhoon"
+    },
+    "type": {
+      "ar": "دخون",
+      "en": "Traditional Incense"
+    },
+    "oldPrice": 200,
+    "price": 110,
+    "size": "—",
+    "note": {
+      "ar": "دخون وضايا",
+      "en": "Wadhaya traditional incense"
+    },
+    "image": "/images/zayed.png",
+    "tag": {
+      "ar": "مجموعة الدخون",
+      "en": "Dukhoon Collection"
+    },
+    "description": {
+      "ar": "دخون الظبي من مجموعة وضايا.",
+      "en": "Al Dhabi from the Wadhaya Dukhoon collection."
+    }
   },
   {
-    "id":"dukhoon-almaha",
-    "category":"dukhoon",
-    "name":{"ar":"دخون ألمها","en":"Al Maha Dukhoon"},
-    "type":{"ar":"دخون","en":"Traditional Incense"},
-    "oldPrice":150,
-    "price":90,
-    "size":"—",
-    "note":{"ar":"دخون وضايا","en":"Wadhaya traditional incense"},
-    "image":"/images/zayed.png",
-    "tag":{"ar":"مجموعة الدخون","en":"Dukhoon Collection"},
-    "description":{"ar":"دخون ألمها من مجموعة وضايا.","en":"Al Maha from the Wadhaya Dukhoon collection."}
+    "id": "dukhoon-almaha",
+    "category": "dukhoon",
+    "name": {
+      "ar": "دخون ألمها",
+      "en": "Al Maha Dukhoon"
+    },
+    "type": {
+      "ar": "دخون",
+      "en": "Traditional Incense"
+    },
+    "oldPrice": 150,
+    "price": 90,
+    "size": "—",
+    "note": {
+      "ar": "دخون وضايا",
+      "en": "Wadhaya traditional incense"
+    },
+    "image": "/images/zayed.png",
+    "tag": {
+      "ar": "مجموعة الدخون",
+      "en": "Dukhoon Collection"
+    },
+    "description": {
+      "ar": "دخون ألمها من مجموعة وضايا.",
+      "en": "Al Maha from the Wadhaya Dukhoon collection."
+    }
   }
 ]
