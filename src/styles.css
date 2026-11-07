@@ -134,3 +134,48 @@
 .dukhoon-coming{display:inline-flex;border:1px solid rgba(207,160,76,.42);padding:8px 17px;color:var(--gold-light);font-size:11px;margin-bottom:28px}
 .dukhoon-content .button-outline{display:flex;width:max-content}
 @media(max-width:760px){.dukhoon-page{grid-template-columns:1fr;gap:32px;padding-top:45px;padding-bottom:65px}.dukhoon-visual{min-height:300px}.dukhoon-emblem{font-size:145px}.dukhoon-content h1{font-size:37px}}
+
+
+/* Wadhaya 2026 premium art direction */
+:root{--gold:#d4ad69;--gold-light:#f0d9a8;--ink:#17090c;--line:rgba(212,173,105,.24)}
+html{scroll-behavior:smooth}
+.site-header{position:sticky;top:0;backdrop-filter:blur(18px);background:rgba(18,8,10,.94);box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.main-nav button{position:relative;transition:color .25s ease}
+.main-nav button:after{content:"";position:absolute;inset-inline:0;bottom:-7px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .25s ease}
+.main-nav button:hover:after{transform:scaleX(1)}
+.hero{min-height:640px;background:#100609}
+.hero-image{background-image:url('/images/wadhaya-luxury-hero.svg');background-position:center 53%;transform:scale(1.005)}
+.hero-shade{background:linear-gradient(90deg,rgba(12,4,7,.88) 0%,rgba(12,4,7,.62) 38%,rgba(12,4,7,.08) 100%),linear-gradient(0deg,rgba(12,4,7,.76),transparent 30%,rgba(12,4,7,.14))}
+.hero-content{max-width:560px}
+.hero h1{text-shadow:0 4px 30px rgba(0,0,0,.25)}
+.eyebrow{color:#e2c58d}
+.button-gold{background:linear-gradient(120deg,#f0d9a8 0%,#d0a45b 48%,#a97835 100%);box-shadow:0 9px 28px rgba(180,132,59,.17);transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.button-gold:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(180,132,59,.25);filter:brightness(1.06)}
+.button-text:hover,.underlined-link:hover{color:#f0d9a8}
+.intro-section{position:relative}
+.intro-section:after{content:"";position:absolute;inset-inline-end:8%;top:22%;width:1px;height:56%;background:linear-gradient(transparent,rgba(98,1,12,.2),transparent)}
+.collection-section{background:radial-gradient(ellipse at 50% 0%,#29151a 0%,#180b0f 58%,#12080a 100%)}
+.product-card{transition:transform .35s ease}
+.product-card:hover{transform:translateY(-5px)}
+.product-image{outline:1px solid rgba(212,173,105,.12);outline-offset:-1px}
+.product-image img{transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s}
+.product-card:hover .product-image img{transform:scale(1.055);filter:saturate(1.05) brightness(.96)}
+.product-name{transition:color .25s ease}
+.add-button{min-height:43px;transition:background .25s ease,border-color .25s ease,color .25s ease}
+.add-button:hover{background:linear-gradient(120deg,#d4ad69,#a97835);color:#1c0b0d}
+.story-banner{isolation:isolate}
+.story-banner-image{background-image:url('/images/wadhaya-luxury-hero.svg');background-position:center 62%;filter:saturate(.72) brightness(.78)}
+.story-banner:before{background:linear-gradient(90deg,rgba(24,5,10,.94),rgba(24,5,10,.72) 55%,rgba(24,5,10,.26))}
+.quote-section{position:relative;overflow:hidden}
+.quote-section:before,.quote-section:after{content:"";position:absolute;width:260px;height:260px;border:1px solid rgba(212,173,105,.12);border-radius:50%;transform:scaleX(.62) rotate(35deg);pointer-events:none}
+.quote-section:before{inset-inline-start:-100px;top:-150px}
+.quote-section:after{inset-inline-end:-100px;bottom:-170px}
+.site-footer{background:linear-gradient(180deg,#100609,#080304)}
+.inner-page{background:radial-gradient(ellipse at 50% 0%,rgba(90,30,40,.18),transparent 50%)}
+.page-intro h1,.story-page h1,.contact-page h1{color:#f1e5d0}
+.product-detail .detail-image{box-shadow:0 24px 65px rgba(0,0,0,.28);outline:1px solid rgba(212,173,105,.18);outline-offset:-1px}
+.checkout-modal,.cart-drawer{backdrop-filter:blur(16px)}
+:focus-visible{outline-color:#f0d9a8}
+@media(min-width:1200px){.hero{height:min(790px,calc(100svh - 100px))}.hero-content{inset-inline-start:13%;width:min(540px,43%)}.section-pad{padding-inline:12%}.story-banner{padding-inline:12%}}
+@media(max-width:680px){.site-header{position:sticky;top:0}.hero{min-height:630px}.hero-image{background-position:61% center}.hero-shade{background:linear-gradient(0deg,rgba(12,4,7,.94),rgba(12,4,7,.52) 58%,rgba(12,4,7,.15)),linear-gradient(90deg,rgba(12,4,7,.25),transparent)}.hero-content{bottom:88px}.intro-section:after{display:none}.story-banner-image{background-position:60% center}}
+@media(prefers-reduced-motion:reduce){.product-card,.button-gold,.product-image img{transition:none!important}}
