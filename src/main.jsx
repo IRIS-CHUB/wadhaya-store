@@ -18,11 +18,10 @@ const copy = {
     subtotal: 'المجموع', shipping: 'الشحن', shippingText: 'يُحدد عند تأكيد الطلب', checkout: 'اطلب عبر واتساب', remove: 'حذف', totalItems: 'منتجات',
     storyEyebrow: 'روح المكان', storyTitle: 'من رمال الصحراء\\nإلى ذاكرة العطر.', storyText: 'وُلدت وضايا من شغف بالتفاصيل العربية الأصيلة؛ من دفء العود، وهدوء الرمال، وبريق الذهب المطفي. نصنع عطوراً لا تتبع اللحظة، بل تترك بصمتها الخاصة.',
     storyButton: 'تعرّف على عطورنا', quote: 'العطر ذاكرة لا تُرى، لكنها لا تُنسى.',
-    newsletterTitle: 'كن أول من يعرف', newsletterText: 'اكتشف الإصدارات الجديدة والحكايات القادمة من عالم وضايا.', newsletterPlaceholder: 'بريدك الإلكتروني', newsletterButton: 'انضم إلينا',
     footerLine: 'عطور تحمل روح المكان، وتترك أثرها في كل مكان.', quickLinks: 'روابط سريعة', follow: 'تابع عالمنا', rights: 'جميع الحقوق محفوظة.',
     back: 'العودة للمتجر', productNotFound: 'لم يتم العثور على المنتج.', notes: 'النفحات العطرية', size: 'الحجم', currency: 'د.إ', qty: 'الكمية',
     top: 'النوتات العليا', middle: 'نوتات القلب', base: 'النوتات الأساسية', family: 'العائلة العطرية',
-    whatsappIntro: 'مرحباً وضايا، أرغب في طلب المنتجات التالية:', whatsappName: 'الاسم', whatsappPhone: 'رقم الهاتف', whatsappAddress: 'عنوان التوصيل', customerDetails: 'بيانات الطلب', namePlaceholder: 'الاسم الكامل', phonePlaceholder: '+97150870882', addressPlaceholder: 'المدينة والمنطقة والعنوان', sendOrder: 'متابعة الطلب عبر واتساب', orderHint: 'سيتم فتح واتساب لإرسال تفاصيل طلبك. لم يتم تحصيل أي مبلغ عبر الموقع.',
+    whatsappIntro: 'مرحباً وضايا، أرغب في طلب المنتجات التالية:', whatsappName: 'الاسم', whatsappPhone: 'رقم الهاتف', whatsappAddress: 'عنوان التوصيل', customerDetails: 'بيانات الطلب', namePlaceholder: 'الاسم الكامل', phonePlaceholder: '+971 50 877 0882', addressPlaceholder: 'المدينة والمنطقة والعنوان', sendOrder: 'متابعة الطلب عبر واتساب', orderHint: 'سيتم فتح واتساب لإرسال تفاصيل طلبك. لم يتم تحصيل أي مبلغ عبر الموقع.',
     toastAdded: 'أُضيف المنتج إلى الحقيبة', toastLanguage: 'Language switched to English', menu: 'القائمة', close: 'إغلاق', featured: 'مختارة لك'
   },
   en: {
@@ -37,11 +36,10 @@ const copy = {
     subtotal: 'Subtotal', shipping: 'Shipping', shippingText: 'Confirmed with your order', checkout: 'Order via WhatsApp', remove: 'Remove', totalItems: 'items',
     storyEyebrow: 'A sense of place', storyTitle: 'From desert sands\\nto the memory of scent.', storyText: 'Wadhaya was born from a devotion to authentic Arabian details: the warmth of oud, the stillness of sand and the glow of matte gold. We create fragrances that go beyond the moment and leave a signature of their own.',
     storyButton: 'Discover our fragrances', quote: 'Fragrance is an unseen memory that never fades.',
-    newsletterTitle: 'Be the first to know', newsletterText: 'Discover new releases and stories from the world of Wadhaya.', newsletterPlaceholder: 'Your email address', newsletterButton: 'Join us',
     footerLine: 'Fragrances carrying the spirit of a place, leaving an impression everywhere.', quickLinks: 'Quick links', follow: 'Follow our world', rights: 'All rights reserved.',
     back: 'Back to shop', productNotFound: 'Product not found.', notes: 'Fragrance notes', size: 'Size', currency: 'AED',
     top: 'Top notes', middle: 'Heart notes', base: 'Base notes', family: 'Olfactive family',
-    qty: 'Quantity', whatsappIntro: 'Hello Wadhaya, I would like to order the following:', whatsappName: 'Name', whatsappPhone: 'Phone number', whatsappAddress: 'Delivery address', customerDetails: 'Order details', namePlaceholder: 'Full name', phonePlaceholder: '+971...', addressPlaceholder: 'City, area and address', sendOrder: 'Continue order on WhatsApp', orderHint: 'WhatsApp will open with your order details. No payment is collected on this website.',
+    qty: 'Quantity', whatsappIntro: 'Hello Wadhaya, I would like to order the following:', whatsappName: 'Name', whatsappPhone: 'Phone number', whatsappAddress: 'Delivery address', customerDetails: 'Order details', namePlaceholder: 'Full name', phonePlaceholder: '+971 50 877 0882', addressPlaceholder: 'City, area and address', sendOrder: 'Continue order on WhatsApp', orderHint: 'WhatsApp will open with your order details. No payment is collected on this website.',
     toastAdded: 'Added to your bag', toastLanguage: 'تم تغيير اللغة إلى العربية', menu: 'Menu', close: 'Close', featured: 'Curated for you'
   }
 }
@@ -111,7 +109,6 @@ function App() {
       `${t.whatsappPhone}: ${customer.phone}`,
       `${t.whatsappAddress}: ${customer.address}`
     ]
-    // Replace with your store WhatsApp number in international format, without + or spaces.
     const whatsappNumber = '971508770882'
     return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(lines.join('\n'))}`
   }, [cart, customer, lang, subtotal, t])
@@ -211,7 +208,6 @@ function App() {
         </section>
 
         <section className="quote-section"><span className="quote-mark">“</span><p>{t.quote}</p><span className="quote-rule"/></section>
-        <Newsletter t={t} lang={lang}/>
       </main>}
 
       {page.name === 'shop' && <main className="inner-page section-pad">
@@ -233,7 +229,7 @@ function App() {
 
       {page.name === 'story' && <main className="inner-page section-pad story-page"><p className="small-overline">{t.storyEyebrow}</p><h1>{t.storyTitle.split('\\n').map((line, i) => <React.Fragment key={line}>{i > 0 && <br/>}{line}</React.Fragment>)}</h1><p className="story-long">{t.storyText}</p><div className="story-values">{t.craftPoints.map((point, i) => <div key={point}><span>0{i+1}</span><h3>{point}</h3></div>)}</div><button className="button-gold" onClick={() => go('shop')}>{t.storyButton}<ArrowLeft size={17}/></button></main>}
 
-      {page.name === 'contact' && <main className="inner-page section-pad contact-page"><p className="small-overline">{t.navContact}</p><h1>{isAr ? 'يسعدنا تواصلك.' : 'We would love to hear from you.'}</h1><p>{isAr ? 'للاستفسارات حول العطور أو الطلبات، تواصل معنا عبر واتساب.' : 'For fragrance and order enquiries, reach us on WhatsApp.'}</p><a className="button-gold link-button" href="https://wa.me/971508770882" target="_blank" rel="noreferrer">{isAr ? 'تواصل عبر واتساب' : 'Chat on WhatsApp'}<ArrowLeft size={17}/></a><p className="contact-note">{isAr ? 'يرجى استبدال رقم واتساب التجريبي برقم متجرك قبل الإطلاق.' : 'Please replace the placeholder WhatsApp number with your store number before launch.'}</p></main>}
+      {page.name === 'contact' && <main className="inner-page section-pad contact-page"><p className="small-overline">{t.navContact}</p><h1>{isAr ? 'يسعدنا تواصلك.' : 'We would love to hear from you.'}</h1><p>{isAr ? 'للاستفسارات حول العطور أو الطلبات، تواصل معنا عبر واتساب.' : 'For fragrance and order enquiries, reach us on WhatsApp.'}</p><a className="button-gold link-button" href="https://wa.me/971508770882" target="_blank" rel="noreferrer">{isAr ? 'تواصل عبر واتساب' : 'Chat on WhatsApp'}<ArrowLeft size={17}/></a></main>}
 
       <footer className="site-footer" id="contact">
         <div className="footer-main"><div className="footer-brand"><button className="brand footer-logo" onClick={() => go('home')} aria-label="Wadhaya home"><img className="brand-emblem" src="/WD.png" alt="" /><span className="brand-wordmark"><span className="brand-ar">وَضَايَا</span><span className="brand-en">W A D H A Y A</span></span></button><p>{t.footerLine}</p></div><div className="footer-links"><h4>{t.quickLinks}</h4><button onClick={() => go('home')}>{t.navHome}</button><button onClick={() => go('shop')}>{t.navShop}</button><button onClick={() => go('dukhoon')}>{t.navDukhoon}</button><button onClick={() => go('story')}>{t.navStory}</button><button onClick={() => go('contact')}>{t.navContact}</button></div><div className="footer-social"><h4>{t.follow}</h4><a href="https://www.instagram.com/wadhaya.perfume/" target="_blank" rel="noopener noreferrer" aria-label="Wadhaya Perfume on Instagram"><svg className="social-logo" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>Instagram</span><ArrowDownLeft size={14}/></a><a href="https://www.tiktok.com/@wadhaya47" target="_blank" rel="noopener noreferrer" aria-label="Wadhaya Perfume on TikTok"><svg className="social-logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.2a4.2 4.2 0 1 1-3.5-4.14v3.1a1.25 1.25 0 1 0 .5 1V3h3c.4 2.5 1.8 4 4 4.4v3.1A8 8 0 0 1 14 8.7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg><span>TikTok</span><ArrowDownLeft size={14}/></a><a href="https://wa.me/971508770882" target="_blank" rel="noopener noreferrer" aria-label="Wadhaya on WhatsApp"><svg className="social-logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/><path d="M9 8.5c.5 2.5 2 4 4.5 5l1.5-1 2 1c-.4 2-2 2.5-3.5 2-4-1-6-3.5-6.5-6.5-.1-1 1-2 2-1.5Z" fill="currentColor"/></svg><span>WhatsApp</span><ArrowDownLeft size={14}/></a></div></div>
@@ -256,12 +252,6 @@ function App() {
       <button className="floating-top" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} aria-label="Back to top"><ArrowRight size={17}/></button>
     </div>
   )
-}
-
-function Newsletter({ t, lang }) {
-  const [email, setEmail] = useState('')
-  const [submitted, setSubmitted] = useState(false)
-  return <section className="newsletter section-pad"><div><p className="small-overline">A NOTE FROM WADHAYA</p><h2>{t.newsletterTitle}</h2><p>{t.newsletterText}</p></div><form onSubmit={e => {e.preventDefault(); setSubmitted(true)}} className="newsletter-form"><input type="email" required value={email} onChange={e => {setEmail(e.target.value); setSubmitted(false)}} placeholder={t.newsletterPlaceholder}/><button type="submit">{submitted ? <Check size={18}/> : t.newsletterButton}</button>{submitted && <span className="newsletter-success">{lang === 'ar' ? 'شكراً لاهتمامك. ربط الاشتراك يحتاج إلى خدمة بريد إلكتروني.' : 'Thank you. Connect an email service to store subscriptions.'}</span>}</form></section>
 }
 
 createRoot(document.getElementById('root')).render(<App />)
