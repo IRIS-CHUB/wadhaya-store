@@ -331,21 +331,21 @@
       "ar": "دخون",
       "en": "Traditional Incense"
     },
-    "oldPrice": 150,
-    "price": 90,
+    "oldPrice": 200,
+    "price": 120,
     "size": "—",
     "note": {
       "ar": "دخون وضايا",
       "en": "Wadhaya traditional incense"
     },
-    "image": "/images/zayed.png",
+    "image": "/images/Dukhoon Al Diwan Luxury.png",
     "tag": {
       "ar": "مجموعة الدخون",
       "en": "Dukhoon Collection"
     },
     "description": {
-      "ar": "دخون الديوان من مجموعة وضايا.",
-      "en": "Al Diwan from the Wadhaya Dukhoon collection."
+      "ar": "دخون الديوان من مجموعة وضايا، بسعر خاص 120 درهماً بدلاً من 200 درهم.",
+      "en": "Al Diwan Dukhoon from the Wadhaya collection, now AED 120 instead of AED 200."
     }
   },
   {
