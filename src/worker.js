@@ -210,9 +210,31 @@ export default {
         return json({ products: defaultProducts, source: "bundled-fallback" });
       }
     }
+    if (url.pathname === "/api/reviews" && request.method === "POST") {
+      try {
+        if (!sameOrigin(request, url)) return json({ error: "Invalid request origin." }, 403);
+        const body = await readJson(request, 5000);
+        const productId = String(body.productId || "");
+        const customerName = String(body.customerName || "").trim();
+        const comment = String(body.comment || "").trim();
+        const rating = Number(body.rating);
+        if (!/^[a-z0-9-]{2,50}$/i.test(productId) || !Number.isInteger(rating) || rating < 1 || rating > 5 || !comment || comment.length > 2000 || customerName.length > 80) return json({ error: "يرجى إدخال تقييم وتعليق صحيحين." }, 400);
+        const product = await env.DB.prepare("SELECT id FROM products WHERE id = ?").bind(productId).first();
+        if (!product) return json({ error: "المنتج غير موجود." }, 404);
+        const now = Math.floor(Date.now() / 1000);
+        await env.DB.prepare("INSERT INTO product_reviews (product_id, customer_name, rating, comment, created_at) VALUES (?, ?, ?, ?, ?)").bind(productId, customerName || "زبون", rating, comment, now).run();
+        return json({ ok: true }, 201);
+      } catch (error) {
+        return json({ error: error.message === "Request too large" ? error.message : "تعذر حفظ رأيك حالياً." }, error.message === "Request too large" ? 413 : 500);
+      }
+    }
     if (url.pathname.startsWith("/api/admin/")) {
       const admin = await getAdmin(request, env, url);
       if (!admin) return json({ error: "Unauthorized." }, 401);
+      if (request.method === "GET" && url.pathname === "/api/admin/reviews") {
+        const rows = await env.DB.prepare("SELECT r.id, r.product_id, COALESCE(json_extract(p.product_json, '$.name.ar'), r.product_id) AS product_name, r.customer_name, r.rating, r.comment, r.created_at FROM product_reviews r LEFT JOIN products p ON p.id = r.product_id ORDER BY r.created_at DESC LIMIT 500").all();
+        return json({ reviews: rows.results });
+      }
       if (request.method === "GET" && url.pathname === "/api/admin/products") {
         let rows = await env.DB.prepare("SELECT product_json FROM products ORDER BY sort_order, id").all();
         if (!rows.results.length) {
