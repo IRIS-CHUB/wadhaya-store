@@ -76,3 +76,29 @@ This branch changes deployment from a static Pages-only build to a Worker with s
 - The setup token is one-time and the endpoint refuses setup after an admin account exists.
 - Keep Cloudflare account access protected with MFA.
 - Online payments, product CRUD APIs and order persistence are not included in this authentication foundation yet.
+
+## Advanced admin permissions and website analytics
+
+Apply the new migration before using the expanded dashboard:
+
+```bash
+npx wrangler@4.153.0 d1 migrations apply wadhaya-store-db --remote
+```
+
+Then build and deploy the Worker and static assets:
+
+```bash
+npm run deploy
+```
+
+The dashboard now includes:
+- `/admin-analytics.html`: page-view counts for the last 24 hours, previous 24 hours, all-time views, a seven-day chart, and most-viewed paths.
+- `/admin-reviews.html`: private customer feedback in a structured table.
+- Staff accounts created by the owner, with preset permissions for product management, private feedback viewing, or read-only analysis.
+- An admin activity log for staff account changes and product catalogue updates.
+
+Visit tracking records page views (not unique people or sessions). A visit is recorded when the storefront's in-app page changes. Analytics start accumulating after migration and deployment; earlier traffic cannot be reconstructed. Do not interpret page views as unique visitors.
+
+Only the owner can create or disable staff accounts and inspect the activity log. API endpoints enforce permissions server-side. The original owner account is retained as the owner during migration; staff sign in at `/admin.html`.
+
+Orders and customer checkout details are not stored by the current WhatsApp handoff flow, so this dashboard does not claim order or customer-sales analytics.
