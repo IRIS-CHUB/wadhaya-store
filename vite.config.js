@@ -8,6 +8,7 @@ export default defineConfig({
       input: {
         main: 'index.html',
         admin: 'admin.html',
+        analytics: 'admin-analytics.html',
       },
     },
   },
