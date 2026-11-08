@@ -23,7 +23,7 @@ function AdminApp() {
  return <main className="admin-shell admin-dashboard" dir="rtl">
   <header className="admin-topbar"><div className="admin-brand"><span className="admin-mark">و</span><span>وَضَايَا<small>WADHAYA ADMIN</small></span></div>{mode==='dashboard'&&<div className="admin-user"><span>{email}</span><button onClick={logout}><LogOut size={16}/> خروج</button></div>}</header>
   {mode==='dashboard'?<div className="admin-layout">
-   <aside className="admin-sidebar"><p className="admin-kicker">مساحة العمل</p><button className="active"><Package size={17}/> المنتجات</button><div className="admin-sidebar-note">إدارة الكتالوج والأسعار والصور. الطلبات تظل عبر واتساب كما هي.</div><a href="/" className="admin-back">عرض المتجر ↗</a></aside>
+   <aside className="admin-sidebar"><p className="admin-kicker">مساحة العمل</p><button className="active"><Package size={17}/> المنتجات</button><a className="admin-back" href="/admin-reviews.html">آراء الزبائن الخاصة ↗</a><div className="admin-sidebar-note">إدارة الكتالوج والأسعار والصور. الطلبات تظل عبر واتساب كما هي.</div><a href="/" className="admin-back">عرض المتجر ↗</a></aside>
    <section className="admin-content"><div className="admin-heading"><div><p className="admin-kicker">إدارة المتجر</p><h1>المنتجات والعطور</h1><p className="admin-muted">أضف العطور أو حدّث تفاصيلها وأسعارها وصورها.</p></div><button className="admin-primary" onClick={startNew}><Plus size={17}/> إضافة منتج</button></div>
     <div className="admin-stats"><div><span>إجمالي المنتجات</span><strong>{products.length}</strong></div><div><span>العملة</span><strong>د.إ</strong></div><div><span>طريقة الطلب</span><strong>واتساب</strong></div></div>
     {message&&<p className="admin-message admin-notice" role="status">{message}</p>}
