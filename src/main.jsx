@@ -69,6 +69,10 @@ function App() {
   useEffect(() => { fetch('/api/products').then(r => r.ok ? r.json() : null).then(data => { if (Array.isArray(data?.products) && data.products.length) setCatalog(data.products) }).catch(() => {}) }, [])
   const [lang, setLang] = useState('ar')
   const [page, setPage] = useState({ name: 'home', id: null })
+  useEffect(() => {
+    const path = page.name === 'product' ? `/product/${page.id || ''}` : page.name === 'home' ? '/' : `/${page.name}`;
+    fetch('/api/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify({ path }) }).catch(() => {})
+  }, [page.name, page.id])
   const [cart, setCart] = useState([])
   const [cartOpen, setCartOpen] = useState(false)
   const [mobileMenu, setMobileMenu] = useState(false)
