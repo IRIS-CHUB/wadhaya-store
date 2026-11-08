@@ -101,23 +101,35 @@ async function getAdmin(request, env, url) {
   const tokenHash = await sha256(token);
   const now = Math.floor(Date.now() / 1000);
   const row = await env.DB.prepare(
-    "SELECT users.id, users.email FROM sessions JOIN users ON users.id = sessions.user_id WHERE sessions.token_hash = ? AND sessions.expires_at > ? AND users.role = 'admin' LIMIT 1"
+    "SELECT users.id, users.email, users.access_level, users.permissions FROM sessions JOIN users ON users.id = sessions.user_id WHERE sessions.token_hash = ? AND sessions.expires_at > ? AND users.role = 'admin' AND users.is_active = 1 LIMIT 1"
   ).bind(tokenHash, now).first();
-  return row || null;
+  if (!row) return null;
+  let permissions = [];
+  try { permissions = JSON.parse(row.permissions || "[]"); } catch {}
+  return { ...row, permissions, isOwner: row.access_level === "owner" };
+}
+
+function can(admin, permission) {
+  return !!admin && (admin.isOwner || admin.permissions.includes(permission));
+}
+
+async function audit(env, admin, action, details = "") {
+  await env.DB.prepare("INSERT INTO admin_activity (actor_id, actor_email, action, details, created_at) VALUES (?, ?, ?, ?, ?)")
+    .bind(admin?.id || null, admin?.email || "system", action, String(details).slice(0, 500), Math.floor(Date.now() / 1000)).run();
 }
 
 async function handleAuth(request, env, url) {
   const path = url.pathname;
   if (request.method === "GET" && path === "/api/auth/me") {
     const admin = await getAdmin(request, env, url);
-    return admin ? json({ authenticated: true, admin: { email: admin.email } }) : json({ authenticated: false }, 401);
+    return admin ? json({ authenticated: true, admin: { id: admin.id, email: admin.email, accessLevel: admin.access_level, permissions: admin.permissions, isOwner: admin.isOwner } }) : json({ authenticated: false }, 401);
   }
 
   if (request.method === "POST" && !sameOrigin(request, url)) return json({ error: "Invalid request origin." }, 403);
 
   if (request.method === "POST" && path === "/api/auth/setup") {
     if (!env.ADMIN_SETUP_TOKEN || !env.PASSWORD_PEPPER) return json({ error: "Admin setup is not configured. Add the required Worker secrets first." }, 503);
-    const count = await env.DB.prepare("SELECT COUNT(*) AS count FROM users WHERE role = 'admin'").first();
+    const count = await env.DB.prepare("SELECT COUNT(*) AS count FROM users WHERE role = 'admin' AND access_level = 'owner'").first();
     if (Number(count?.count || 0) > 0) return json({ error: "Admin is already configured." }, 409);
     const body = await readJson(request);
     if (!constantTimeEqual(body.setupToken, env.ADMIN_SETUP_TOKEN)) return json({ error: "Invalid setup token." }, 403);
@@ -129,7 +141,7 @@ async function handleAuth(request, env, url) {
     const id = crypto.randomUUID();
     const now = Math.floor(Date.now() / 1000);
     try {
-      await env.DB.prepare("INSERT INTO users (id, email, password_hash, password_salt, password_iterations, role, created_at) VALUES (?, ?, ?, ?, ?, 'admin', ?)")
+      await env.DB.prepare("INSERT INTO users (id, email, password_hash, password_salt, password_iterations, role, created_at, access_level, permissions, is_active) VALUES (?, ?, ?, ?, ?, 'admin', ?, 'owner', '[]', 1)")
         .bind(id, email, record.hash, record.salt, record.iterations, now).run();
     } catch {
       return json({ error: "Admin setup has already been completed." }, 409);
@@ -153,7 +165,7 @@ async function handleAuth(request, env, url) {
       return json({ error: "Too many attempts. Try again in 15 minutes." }, 429, { "Retry-After": "900" });
     }
 
-    const user = await env.DB.prepare("SELECT id, email, password_hash, password_salt, password_iterations FROM users WHERE email = ? AND role = 'admin' LIMIT 1").bind(email).first();
+    const user = await env.DB.prepare("SELECT id, email, password_hash, password_salt, password_iterations FROM users WHERE email = ? AND role = 'admin' AND is_active = 1 LIMIT 1").bind(email).first();
     let valid = false;
     if (user) {
       const candidate = await passwordHash(password, user.password_salt, env.PASSWORD_PEPPER);
@@ -210,6 +222,17 @@ export default {
         return json({ products: defaultProducts, source: "bundled-fallback" });
       }
     }
+    if (url.pathname === "/api/track" && request.method === "POST") {
+      try {
+        if (!sameOrigin(request, url)) return json({ error: "Invalid request origin." }, 403);
+        const body = await readJson(request, 1000);
+        const pagePath = String(body.path || "/").slice(0, 200);
+        if (!pagePath.startsWith("/") || pagePath.startsWith("//") || pagePath.startsWith("/api/")) return json({ error: "Invalid page." }, 400);
+        await env.DB.prepare("INSERT INTO site_visits (page_path, created_at) VALUES (?, ?)")
+          .bind(pagePath, Math.floor(Date.now() / 1000)).run();
+        return json({ ok: true }, 202);
+      } catch { return json({ error: "تعذر تسجيل الزيارة." }, 500); }
+    }
     if (url.pathname === "/api/reviews" && request.method === "POST") {
       try {
         if (!sameOrigin(request, url)) return json({ error: "Invalid request origin." }, 403);
@@ -232,10 +255,12 @@ export default {
       const admin = await getAdmin(request, env, url);
       if (!admin) return json({ error: "Unauthorized." }, 401);
       if (request.method === "GET" && url.pathname === "/api/admin/reviews") {
+        if (!can(admin, "reviews.read")) return json({ error: "Forbidden." }, 403);
         const rows = await env.DB.prepare("SELECT r.id, r.product_id, COALESCE(json_extract(p.product_json, '$.name.ar'), r.product_id) AS product_name, r.customer_name, r.rating, r.comment, r.created_at FROM product_reviews r LEFT JOIN products p ON p.id = r.product_id ORDER BY r.created_at DESC LIMIT 500").all();
         return json({ reviews: rows.results });
       }
       if (request.method === "GET" && url.pathname === "/api/admin/products") {
+        if (!can(admin, "products.read")) return json({ error: "Forbidden." }, 403);
         let rows = await env.DB.prepare("SELECT product_json FROM products ORDER BY sort_order, id").all();
         if (!rows.results.length) {
           await env.DB.batch(defaultProducts.map((product, index) => env.DB.prepare("INSERT OR IGNORE INTO products (id, product_json, sort_order, updated_at) VALUES (?, ?, ?, ?)").bind(product.id, JSON.stringify(product), index, Math.floor(Date.now() / 1000))));
@@ -244,6 +269,7 @@ export default {
         return json({ products: rows.results.map((row) => JSON.parse(row.product_json)) });
       }
       if (request.method === "PUT" && url.pathname === "/api/admin/products") {
+        if (!can(admin, "products.write")) return json({ error: "Forbidden." }, 403);
         if (!sameOrigin(request, url)) return json({ error: "Invalid request origin." }, 403);
         const body = await readJson(request, 200000);
         if (!Array.isArray(body.products) || body.products.length > 100) return json({ error: "قائمة المنتجات غير صالحة." }, 400);
@@ -256,10 +282,71 @@ export default {
         const statements = [env.DB.prepare("DELETE FROM products")];
         body.products.forEach((p, index) => statements.push(env.DB.prepare("INSERT INTO products (id, product_json, sort_order, updated_at) VALUES (?, ?, ?, ?)").bind(p.id, JSON.stringify(p), index, now)));
         await env.DB.batch(statements);
+        await audit(env, admin, "products.updated", body.products.length + " products");
         return json({ ok: true, products: body.products });
       }
       if (request.method === "GET" && url.pathname === "/api/admin/me") {
-        return json({ authenticated: true, admin: { email: admin.email } });
+        return json({ authenticated: true, admin: { id: admin.id, email: admin.email, accessLevel: admin.access_level, permissions: admin.permissions, isOwner: admin.isOwner } });
+      }
+      if (request.method === "GET" && url.pathname === "/api/admin/analytics") {
+        if (!can(admin, "analytics.read")) return json({ error: "Forbidden." }, 403);
+        const now = Math.floor(Date.now() / 1000), day = 86400;
+        const [today, yesterday, total, daily, topPages, reviewCount, productCount, staffCount] = await Promise.all([
+          env.DB.prepare("SELECT COUNT(*) AS count FROM site_visits WHERE created_at >= ?").bind(now - day).first(),
+          env.DB.prepare("SELECT COUNT(*) AS count FROM site_visits WHERE created_at >= ? AND created_at < ?").bind(now - 2 * day, now - day).first(),
+          env.DB.prepare("SELECT COUNT(*) AS count FROM site_visits").first(),
+          env.DB.prepare("SELECT date(created_at, 'unixepoch') AS day, COUNT(*) AS visits FROM site_visits WHERE created_at >= ? GROUP BY date(created_at, 'unixepoch') ORDER BY day").bind(now - 6 * day).all(),
+          env.DB.prepare("SELECT page_path, COUNT(*) AS visits FROM site_visits GROUP BY page_path ORDER BY visits DESC LIMIT 8").all(),
+          env.DB.prepare("SELECT COUNT(*) AS count FROM product_reviews").first(),
+          env.DB.prepare("SELECT COUNT(*) AS count FROM products").first(),
+          env.DB.prepare("SELECT COUNT(*) AS count FROM users WHERE role = 'admin' AND access_level = 'staff' AND is_active = 1").first()
+        ]);
+        return json({ visitsToday: Number(today?.count || 0), visitsYesterday: Number(yesterday?.count || 0), visitsTotal: Number(total?.count || 0), daily: daily.results, topPages: topPages.results, reviews: Number(reviewCount?.count || 0), products: Number(productCount?.count || 0), staff: Number(staffCount?.count || 0) });
+      }
+      if (request.method === "GET" && url.pathname === "/api/admin/activity") {
+        if (!can(admin, "activity.read")) return json({ error: "Forbidden." }, 403);
+        const rows = await env.DB.prepare("SELECT actor_email, action, details, created_at FROM admin_activity ORDER BY created_at DESC LIMIT 200").all();
+        return json({ activity: rows.results });
+      }
+      if (url.pathname === "/api/admin/users" && request.method === "GET") {
+        if (!admin.isOwner) return json({ error: "Forbidden." }, 403);
+        const rows = await env.DB.prepare("SELECT id, email, access_level, permissions, is_active, created_at FROM users WHERE role = 'admin' ORDER BY created_at").all();
+        return json({ users: rows.results.map(u => ({ ...u, permissions: JSON.parse(u.permissions || "[]"), is_active: Number(u.is_active) })) });
+      }
+      if (url.pathname === "/api/admin/users" && request.method === "POST") {
+        if (!admin.isOwner) return json({ error: "Forbidden." }, 403);
+        if (!sameOrigin(request, url)) return json({ error: "Invalid request origin." }, 403);
+        const body = await readJson(request, 5000);
+        const email = String(body.email || "").trim().toLowerCase(), password = String(body.password || "");
+        const role = String(body.accessLevel || "staff");
+        const presets = { products: ["products.read", "products.write"], reviews: ["reviews.read"], analyst: ["analytics.read", "reviews.read", "products.read"] };
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password.length < 12 || password.length > 128 || !presets[role]) return json({ error: "بيانات الموظف أو الدور غير صالحة." }, 400);
+        const record = await makePasswordRecord(password, env.PASSWORD_PEPPER), id = crypto.randomUUID(), now = Math.floor(Date.now() / 1000);
+        try {
+          await env.DB.prepare("INSERT INTO users (id,email,password_hash,password_salt,password_iterations,role,created_at,access_level,permissions,is_active,created_by) VALUES (?,?,?,?,?,'admin',?,'staff',?,1,?)")
+            .bind(id,email,record.hash,record.salt,record.iterations,now,JSON.stringify(presets[role]),admin.id).run();
+        } catch { return json({ error: "هذا البريد مستخدم بالفعل." }, 409); }
+        await audit(env, admin, "staff.created", email + " · " + role);
+        return json({ ok: true }, 201);
+      }
+      if (url.pathname.startsWith("/api/admin/users/") && request.method === "PATCH") {
+        if (!admin.isOwner) return json({ error: "Forbidden." }, 403);
+        if (!sameOrigin(request, url)) return json({ error: "Invalid request origin." }, 403);
+        const id = url.pathname.split("/").pop(), body = await readJson(request, 2000);
+        const target = await env.DB.prepare("SELECT id, access_level, is_active FROM users WHERE id = ? AND role = 'admin'").bind(id).first();
+        if (!target) return json({ error: "المستخدم غير موجود." }, 404);
+        if (target.access_level === "owner") return json({ error: "لا يمكن تعديل حساب المدير الرئيسي من هذه الشاشة." }, 400);
+        if (body.isActive === false) await env.DB.prepare("UPDATE users SET is_active = 0 WHERE id = ?").bind(id).run();
+        else if (body.isActive === true) await env.DB.prepare("UPDATE users SET is_active = 1 WHERE id = ?").bind(id).run();
+        if (body.password) {
+          const password = String(body.password);
+          if (password.length < 12 || password.length > 128) return json({ error: "كلمة المرور يجب ألا تقل عن 12 حرفاً." }, 400);
+          const record = await makePasswordRecord(password, env.PASSWORD_PEPPER);
+          await env.DB.prepare("UPDATE users SET password_hash=?,password_salt=?,password_iterations=? WHERE id=?").bind(record.hash,record.salt,record.iterations,id).run();
+          await env.DB.prepare("DELETE FROM sessions WHERE user_id = ?").bind(id).run();
+        }
+        await audit(env, admin, "staff.updated", id);
+        return json({ ok: true });
       }
       return json({ error: "Not found." }, 404);
     }
