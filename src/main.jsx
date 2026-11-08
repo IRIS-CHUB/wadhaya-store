@@ -75,6 +75,11 @@ function App() {
   const [toast, setToast] = useState('')
   const [checkoutOpen, setCheckoutOpen] = useState(false)
   const [customer, setCustomer] = useState({ name: '', phone: '', address: '' })
+  const [reviewName, setReviewName] = useState('')
+  const [reviewRating, setReviewRating] = useState(5)
+  const [reviewComment, setReviewComment] = useState('')
+  const [reviewMessage, setReviewMessage] = useState('')
+  const [reviewBusy, setReviewBusy] = useState(false)
   const t = copy[lang]
   const isAr = lang === 'ar'
   const dir = isAr ? 'rtl' : 'ltr'
@@ -88,6 +93,19 @@ function App() {
     setMobileMenu(false)
     setCheckoutOpen(false)
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+  const submitReview = async (event) => {
+    event.preventDefault()
+    if (!selectedProduct || !reviewComment.trim()) return
+    setReviewBusy(true)
+    setReviewMessage('')
+    try {
+      const response = await fetch('/api/reviews', { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify({ productId: selectedProduct.id, customerName: reviewName, rating: reviewRating, comment: reviewComment }) })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.error || 'تعذر إرسال رأيك')
+      setReviewName(''); setReviewRating(5); setReviewComment('')
+      setReviewMessage(isAr ? 'شكراً لك، وصل رأيك وسيبقى خاصاً بإدارة المتجر.' : 'Thank you. Your feedback was sent privately to the store owner.')
+    } catch (error) { setReviewMessage(error.message || 'تعذر إرسال رأيك') } finally { setReviewBusy(false) }
   }
   const addToCart = (product) => {
     setCart(prev => {
@@ -223,7 +241,7 @@ function App() {
       {page.name === 'product' && <main className="inner-page section-pad">
         {selectedProduct ? <><button className="back-link" onClick={() => go('shop')}><ArrowRight size={16}/>{t.back}</button><div className="product-detail">
           <div className="detail-image"><img src={selectedProduct.image} alt={selectedProduct.name[lang]}/><span className="detail-stamp">W.</span></div>
-          <div className="detail-content"><p className="small-overline">{selectedProduct.type[lang]}</p><h1>{selectedProduct.name[lang]}</h1><p className="detail-price">{selectedProduct.oldPrice && <del>{money(selectedProduct.oldPrice, lang)}</del>}<b>{money(selectedProduct.price, lang)}</b>{selectedProduct.oldPrice && <small className="discount-badge">−{Math.round((1 - selectedProduct.price / selectedProduct.oldPrice) * 100)}%</small>}</p><p className="detail-description">{selectedProduct.description[lang]}</p><div className="detail-rule"/><div className="detail-meta"><span>{t.size}</span><strong>{selectedProduct.size}</strong></div><NotesBlock product={selectedProduct} t={t} lang={lang}/><button className="button-gold detail-add" onClick={() => addToCart(selectedProduct)}>{t.add}<ShoppingBag size={17}/></button></div>
+          <div className="detail-content"><p className="small-overline">{selectedProduct.type[lang]}</p><h1>{selectedProduct.name[lang]}</h1><p className="detail-price">{selectedProduct.oldPrice && <del>{money(selectedProduct.oldPrice, lang)}</del>}<b>{money(selectedProduct.price, lang)}</b>{selectedProduct.oldPrice && <small className="discount-badge">−{Math.round((1 - selectedProduct.price / selectedProduct.oldPrice) * 100)}%</small>}</p><p className="detail-description">{selectedProduct.description[lang]}</p><div className="detail-rule"/><div className="detail-meta"><span>{t.size}</span><strong>{selectedProduct.size}</strong></div><NotesBlock product={selectedProduct} t={t} lang={lang}/><button className="button-gold detail-add" onClick={() => addToCart(selectedProduct)}>{t.add}<ShoppingBag size={17}/></button><section className="customer-review-form"><h2>{isAr ? "شاركنا رأيك في المنتج" : "Share your product feedback"}</h2><p>{isAr ? "رأيك يصل إلى إدارة وضايا فقط ولا يظهر للزوار." : "Your feedback is sent privately to Wadhaya management and is not public."}</p><form onSubmit={submitReview}><label>{isAr ? "اسمك (اختياري)" : "Your name (optional)"}<input value={reviewName} maxLength="80" onChange={e=>setReviewName(e.target.value)} /></label><label>{isAr ? "تقييمك" : "Your rating"}<select value={reviewRating} onChange={e=>setReviewRating(Number(e.target.value))}>{[5,4,3,2,1].map(n=><option key={n} value={n}>{n} / 5</option>)}</select></label><label>{isAr ? "تعليقك" : "Your feedback"}<textarea required maxLength="2000" rows="4" value={reviewComment} onChange={e=>setReviewComment(e.target.value)} placeholder={isAr ? "اكتب رأيك حول العطر أو تجربتك..." : "Tell us about the fragrance or your experience..."}/></label><button className="button-gold" disabled={reviewBusy}>{reviewBusy ? (isAr ? "جارٍ الإرسال..." : "Sending...") : (isAr ? "إرسال رأيي بشكل خاص" : "Send private feedback")}</button>{reviewMessage&&<p role="status">{reviewMessage}</p>}</form></section></div>
         </div></> : <p>{t.productNotFound}</p>}
       </main>}
 
