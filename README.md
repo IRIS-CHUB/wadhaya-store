@@ -55,6 +55,19 @@ Vite serves the storefront, but authentication endpoints require a local Worker 
 
 Wrangler may create the D1 database automatically from the binding on deployment. If it does, confirm the database is visible in Cloudflare and that the migration has been applied before using admin authentication.
 
+## Private customer product feedback
+- Customers can submit a star rating and private comment from each product detail page.
+- Feedback is stored in the private Cloudflare D1 database, not in public GitHub files.
+- Only the authenticated administrator can read feedback at `/admin-reviews.html`.
+- Apply the new migration before deploying this feature:
+  ```bash
+  npx wrangler d1 migrations apply wadhaya-store-db --remote
+  ```
+- Then deploy the Worker and storefront:
+  ```bash
+  npm run deploy
+  ```
+
 ## Important deployment note
 This branch changes deployment from a static Pages-only build to a Worker with static assets and D1. Do not replace the current production deployment until the D1 database, secrets, custom domain routing and smoke tests are complete. Preserve the existing production project as rollback until then.
 
