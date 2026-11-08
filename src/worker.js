@@ -282,6 +282,7 @@ export default {
         const statements = [env.DB.prepare("DELETE FROM products")];
         body.products.forEach((p, index) => statements.push(env.DB.prepare("INSERT INTO products (id, product_json, sort_order, updated_at) VALUES (?, ?, ?, ?)").bind(p.id, JSON.stringify(p), index, now)));
         await env.DB.batch(statements);
+        await audit(env, admin, "products.updated", body.products.length + " products");
         return json({ ok: true, products: body.products });
       }
       if (request.method === "GET" && url.pathname === "/api/admin/me") {
